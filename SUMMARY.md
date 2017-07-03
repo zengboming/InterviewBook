@@ -5,5 +5,6 @@
   * [JAVA特点](chapter1/test.md)
   * [内存泄漏](chapter1/nei-cun-xie-lou.md)
   * [GC](chapter1/gcyuan-li.md)
+  * 内存
 * [网络](javate-dian.md)
 
