@@ -49,3 +49,52 @@
 
 
 
+#### 内存分配
+
+局部变量：\(包括形参\)
+
+	局部变量的数据存在于栈内存中。栈内存中的局部变量随着方法的消失而消失。
+
+成员变量：\(类的内部定义的变量\)
+
+	成员变量存储在堆中的对象里面，由垃圾回收器负责回收。
+
+
+
+int a = 1;
+
+int b = 1;
+
+在栈中创建一个变量为a的引用 - 在栈查找是否有1这个值，若没有则存入，并将a指向1 - 创建b的引用变量 - 将b指向1
+
+
+
+String str  = new String\("hello world"\);
+
+String str1 = new String\("hello world"\);                     str != str1\(每次new都会创建一个新的对象\)
+
+str2 == str3 \(指向同一个对象\)
+
+String str3 = "hello world";
+
+str4 == str2 \(+号连接在编译器确定\)
+
+String str5 = "hello" + new String\(" world"\);               str5 != str2 \(后半段无法在编译期确定\)
+
+* 第一种办法：
+  * 在堆上new了一个值为"hello world"的String对象 - 在栈中创建一个引用变量str指向"hello world"     - 在堆上new了一个值为"hello world"的String对象 - 在栈中创建一个引用变量str1指向"hello world" 。
+  * 一般每个方法的调用都会独立有一个栈来保存str这样的对象的引用变量，在方法返回后，栈会清空，所以引用变量会被清空掉。堆上的对象，如果没有其他的引用变量引用它，就会被Gc在某个合适的时候gc掉。
+
+* 第二种办法：
+  * 在栈中创建一个String类的对象引用变量str2 - 然后通过符号引用去字符串常量池里找是否有"hello world",没有就存入字符串常量池，将str2指向"hello world"  - 在栈中创建一个String类的对象引用变量str3，将str3指向"hello world"。 
+
+String str1 = "hello world";
+
+String str2 = " world";
+
+String str3 = "hello" + str2;                           str3 != str1 \(str2是引用，引用的值在程序编译期无法确定，而是运行期动态分配\)
+
+final String str4 = " world";
+
+str5 == str1 \(final修饰的变量在编译时被解析为常量值的一个本地拷贝存储到自己的常量 池中或嵌入到它的字节码流中\)
+
