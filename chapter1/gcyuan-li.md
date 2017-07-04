@@ -29,9 +29,10 @@ HotSpot虚拟机将其物理上划分为新生代（young generation）、老年
    4. 当一个幸存者空间饱和，还在存活的对象会被移动到另一个幸存者空间。之后会清空已经饱和的幸存者空间。  
    5. 在以上的步骤中重复几次依然存活的对象，就会被移动到老年代。
 
-2. **老年代**（old generation）
-   对象没有变得不可达，并且从新生代中存活下来，会被拷贝到这里。其所占用的空间要比新生代多。也正由于其相对较大的空间，发生在老年代上的GC要比新生代少得多。对象从老年代中消失的过程：”major GC“。
+2. **老年代**（old generation）  
+   对象没有变得不可达，并且从新生代中存活下来，会被拷贝到这里。其所占用的空间要比新生代多。也正由于其相对较大的空间，发生在老年代上的GC要比新生代少得多。对象从老年代中消失的过程：”major GC“。  
    老年代空间的GC事件基本上是在空间已满时发生。
+
 3. **持久代**（ permanent generation ）又叫方法区
 
    用来保存类常量以及字符串常量。这个区域也可能发生GC。并且发生在这个区域上的GC事件也为major GC。
@@ -46,14 +47,17 @@ HotSpot虚拟机将其物理上划分为新生代（young generation）、老年
 
 #### GC交互
 
-三种引用类：SoftReference、WeakReference和 PhantomReference
+JAVA有四种引用类型：StrongReference、SoftReference、WeakReference和 PhantomReference
 
 1. SoftReference
-   只有当内存不够的时候，才进行回收这类内存，因此在内存足够的时候，它们通常不被回收。
+   只有当内存不够的时候，才进行回收这类内存，因此在内存足够的时候，它们通常不被回收。适合某些缓存应用。
 2. WeakReference
    Weak引用对象更容易、更快被 GC回收。GC运行时，必回收。
 3. PhantomReference
-   主要用于辅助 finalize函数的使用。
+   主要用于辅助 finalize函数的使用。它是最弱的一种引用关系，也无法通过PhantomReference取得对象的实例。仅用来当该对象被回收时收到一个通知。
+4. StrongReference
+
+   Java 的默认引用实现, 它会尽可能长时间的存活于 JVM 内，当没有任何对象指向它时将会被GC回收。
 
 #### GC调优
 
