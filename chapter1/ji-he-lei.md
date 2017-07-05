@@ -9,7 +9,7 @@ Collection - List - Vector
 Collection - List - Vector - Stack
 Collection - Set - HashSet
 Collection - Set - TreeSet
-Collection - List - LinkedHashSet
+Collection - Set - LinkedHashSet
 Map - HashMap
 Map - TreeMap
 Map - HashTable
@@ -27,19 +27,43 @@ Map - ConcurrentHashMap
 
 ### List
 
-* #### ArrayList
+* #### ArrayList                            非线程安全
 
   默认大小10个元素
 
-* #### LinkedList
-* #### LinkedHashSet
-* #### Vector
-* #### Stack
+  ArrrayList 底层的数据结构是数组，支持随机访问。访问时间复杂度是 O\(1\)。
+
+* #### LinkedList                          非线程安全
+
+  LinkedList 的底层数据结构是双向链表，不支持随机访问，增删速度快。访问时间复杂度是 O\(n\)。
+
+* #### Vector                                 线程安全
+
+  底层数据结构是数组，支持随机访问。
+
+* #### Stack                                   线程安全
+
+  是Vector提供的一个子类，用于模拟"栈"这种数据结构\(LIFO后进先出\)。
 
 ### Set
 
-* #### HashSet
-* #### TreeSet
+* #### HashSet                              非线程安全  \|  K允许NULL
+
+  内部采用 HashMap来实现。由于 Map 需要 key 和 value，所以 key 的都有一个默认 value。类似于 HashMap，HashSet 不允许重复的 key，只允许有一个null key，意思就是 HashSet 中只允许存储一个 null 对象。
+
+* #### TreeSet                               非线程安全  \|  K不允许NULL
+
+  可以对Set集合中的元素排序，元素以二叉树形式存放。底层的数据结构是红黑树。
+
+  getEntry\(\)、put\(\)方法中，如果key为Null，会报空指针异常。
+
+  它的排序是如何进行的呢？通过compareTo或者compare方法中的来保证元素的唯一性。意味着TreeSet中的元素要实现Comparable接口。或者有一个自定义的比较器。
+
+* #### LinkedHashSet                  非线程安全  \|  K允许NULL
+
+  是Set接口的哈希表和链接列表的实现，保证迭代顺序。链表保证了元素的有序即存储和取出一致，哈希表保证了元素的唯一性。
+
+  具有HashSet的查询速度，且内部采用双向链表维护元素的顺序（默认保持插入顺序排序， 如果初始化时将accessOrder设置为true将使用最近最少顺序，即最近使用的元素插在链表尾部）。元素必须实现hashCode\(）方法。
 
 ### Map
 
@@ -89,17 +113,34 @@ Map - ConcurrentHashMap
 
   ```
   Map map = new HashMap();
-  Map weakmap = new WeakHashMap();
-  map.put(a, "aaa");
-  weakmap.put(a, "aaa");
+  Map weakmap = new WeakHashMap();
+  map.put(a, "aaa");
+  weakmap.put(a, "aaa");
   map.remove(a);
   a = null;
   System.gc();
   //结果：map:b:bbb
   // weakmap:b:bbb
+  //当HashMap  remove掉并且将a指向null后，除了weakmap中还保存a外已经没有指向a的指针了，所以weakmap会自动舍弃掉a。
   ```
 
-      当HashMap  remove掉并且将a指向null后，除了weakmap中还保存a外已经没有指向a的指针了，所以weakmap会自动舍弃掉a。
+#### HashSet、TreeSet、LinkedHashSet 区别：
+
+1. TreeSet不能有NULL，其他可以。
+
+2. TreeSet添加、删除操作时间复杂度都是O\(n\)。其他添加、删除操作时间复杂度都是O\(1\)。
+
+3. TreeSet底层是红黑树，HashSet底层是哈希表，LinkedHashSet底层是由哈希表和链表组成。
+
+#### ArrayList、LinkedList、Vector区别：
+
+1. 随机存取：ArrayList是基于可变大小的数组实现，LinkedList是链接列表的实现。这也就决定了对于随机访问的get和set的操作，ArrayList要优于LinkedList，因为LinkedList要移动指针。
+
+2. 插入和删除：LinkedList要好一些，因为ArrayList要移动数据，更新索引。
+
+3. 内存消耗：LinkedList需要更多的内存，因为需要维护指向后继结点的指针。
+
+4. ArrayList 线程不安全，Vector线程安全。
 
 
 
