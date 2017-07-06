@@ -19,19 +19,30 @@ Class c = a.getClass();
 try{  
     Method method = c.getMethod("add",Object.class);      //反射是运行时，所以可以赋值。
     method.invoke(a,100);  
-      
+
 }catch(Exception e){  
     e.printStackTrace();  
 }
-System.out.println(a);  //[hello, 100]  
+System.out.println(a);  //[hello, 100]
+```
+
+```
+static <T> void printList(List<T> list) {  
+    Iterator<T> it = list.iterator();  
+    while (it.hasNext()) {  
+        System.out.println(it.next());  
+    }  
+}  
 ```
 
 #### 泛型的优点
 
-1. 类型安全
-   通过知道泛型定义的变量类型限制，编译器可以更有效地提高Java程序的类型安全。 
+1. 更安全  
+   把以前只能运行时的类型检查,提到了编译时。 如果类型不匹配编译是不通过,这样把以前只能在运行程序时才能发现的错误。
 
-2. 消除强制类型转换
+   在进行类型转换的时候不会抛出异常。
+
+2. 消除强制类型转换  
    消除源代码中的许多强制类型转换。这使得代码更加可读，并且减少了出错机会。所有的强制转换都是自动和隐式的。
 
 3. 提高性能
@@ -47,17 +58,17 @@ public static void main(String[] args) {
     getUpperNumberData(ex_num);  
     getUpperNumberData(ex_int);  
 }  
-  
+
 public static void getUpperNumberData(FX<? extends Number> temp){  
       System.out.println("class type :" + temp.getClass());  
 }  
-      
+
 public static class FX<T> {  
     private T ob;   
     public FX(T ob) {  
     this.ob = ob;  
     }  
-}  
+}
 ```
 
 

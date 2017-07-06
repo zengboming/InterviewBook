@@ -3,7 +3,7 @@
 * [Introduction](README.md)
 * [JAVA](chapter1.md)
   * [JAVA特点](chapter1/test.md)
-  * .java文件执行过程
+  * [.java文件执行过程](chapter1/javawen-jian-zhi-xing-guo-cheng.md)
   * [内存泄漏](chapter1/nei-cun-xie-lou.md)
   * [GC](chapter1/gcyuan-li.md)
   * [内存管理](chapter1/nei-cun.md)
