@@ -9,14 +9,14 @@
 3. BlockingQueue阻塞队列方法
 4. PipedInputStream / PipedOutputStream
 
-#### 方法一
+#### 方法一    wait\(\) / notify\(\)方法
 
 ```
 public class Storage {
     //最大容量
     private final int MAX_SIZE = 100;        
     private LinkedList<Object> list = new LinkedList<>();
-    
+
     //生产
     public void produce(int num) {
         synchronized (list) {
@@ -38,7 +38,7 @@ public class Storage {
             list.notifyAll();
         }
     }
-    
+
     //消费
     public void consume(int num) {
         synchronized(list) {
@@ -54,7 +54,7 @@ public class Storage {
             catch (InterruptedException e) {  
                 e.printStackTrace();  
             }
-            
+
             //条件满足，消费
             for (int i = 1; i <= num; ++i) {
                 list.remove();
