@@ -18,6 +18,7 @@
 * 操作系统
 * [算法与数据结构](suan-fa-yu-shu-ju-jie-gou.md)
 * 设计模式
+  * [生产者消费者模式](sheng-chan-zhe-xiao-fei-zhe-mo-shi.md)
 * 数据库
 * 云计算
 * JAVA框架
