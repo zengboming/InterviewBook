@@ -10,7 +10,7 @@
   * [类加载器](chapter1/lei-jia-zai-qi.md)
   * [集合类](chapter1/ji-he-lei.md)
   * [反射](chapter1/fan-she.md)
-  * 泛型
+  * [泛型](chapter1/fan-xing.md)
 * JAVA框架
 * [计算机网络](javate-dian.md)
 * 操作系统
