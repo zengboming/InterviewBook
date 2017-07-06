@@ -32,7 +32,7 @@ static <T> void printList(List<T> list) {
     while (it.hasNext()) {  
         System.out.println(it.next());  
     }  
-}  
+}
 ```
 
 #### 泛型的优点

@@ -1,0 +1,7 @@
+## String 和StringBuilder、StringBuffer 的区别 {#string-和stringbuilder、stringbuffer-的区别}
+
+1. 可变和适用范围。String 是**只读**字符串，String对象是不可变的，而StringBuffer和StringBuilder是可变字符序列。每次对String的操作相当于生成一个新的String对象，而对StringBuffer和StringBuilder的操作是对对象本身的操作，而不会生成新的对象，所以对于频繁改变内容的字符串避免使用String，因为频繁的生成对象将会对系统性能产生影响。
+2. 线程安全。String由于有final修饰，是immutable的，安全性是简单而纯粹的。StringBuilder和StringBuffer的区别在于StringBuilder不保证同步，StringBuffer很多方法使用了synchronized。也就是说如果需要线程安全需要使用StringBuffer，不需要同步的StringBuilder效率更高。
+
+
+
