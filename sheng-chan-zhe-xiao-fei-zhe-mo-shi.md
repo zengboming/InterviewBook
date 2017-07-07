@@ -12,57 +12,173 @@
 #### 方法一    wait\(\) / notify\(\)方法
 
 ```
+//仓库类Storage实现缓冲区
 public class Storage {
-    //最大容量
-    private final int MAX_SIZE = 100;        
+
+    private int number = 0;
+    // 仓库最大存储量 
+    private final int MAX_NUM = 5;
+    // 仓库存储的载体 
     private LinkedList<Object> list = new LinkedList<>();
 
-    //生产
-    public void produce(int num) {
+    public void produce() throws InterruptedException {
+        //同步
         synchronized (list) {
-            while (list.size() + num > MAX_SIZE) {
-                System.out.println("【要生产的产品数量】:" + num + "/t【库存量】:"  
-                        + list.size() + "/t暂时不能执行生产任务!"); 
-                try{
-                    //数量太多，产生阻塞
-                    list.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();  
-                }
+            while (number == MAX_NUM) {
+                System.out.println("box is full,size = " + number);
+                //阻塞,线程等待,释放锁
+                obj.wait();
             }
-            //条件满足时，生产
-            for (int i = 1; i <= num; ++i) {
-                list.add(new Object());
-            }
-            System.out.println("【已经生产产品数】:" + num + "/t【现仓储量为】:" + list.size());  
-            list.notifyAll();
+            
+            list.add(new Object());
+            number++;
+            System.out.println("produce success number = " + number);
+            //唤醒当前对象的所有等待的线程
+            obj.notifyAll();
         }
     }
 
-    //消费
-    public void consume(int num) {
-        synchronized(list) {
-            //库存不足
-            while(list.size() < num) {
-                System.out.println("【要消费的产品数量】:" + num + "/t【库存量】:"  
-                        + list.size() + "/t暂时不能执行生产任务!");  
-            }
-            try  {  
-                // 由于条件不满足，消费阻塞  
-                list.wait();  
-            }  
-            catch (InterruptedException e) {  
-                e.printStackTrace();  
+    public void consume() throws InterruptedException {
+        //同步
+        synchronized (list) {
+            while (number == 0) {
+                System.out.println("box is empty,size = " + number);
+                //阻塞
+                obj.wait();
             }
 
-            //条件满足，消费
-            for (int i = 1; i <= num; ++i) {
-                list.remove();
-            }
-            System.out.println("【已经消费产品数】:" + num + "/t【现仓储量为】:" + list.size());  
-            list.notifyAll(); 
+            list.remove();
+            number--;
+            System.out.println("comsume success number = " + number);
+            obj.notifyAll();
         }
     }
+
+}
+```
+
+```
+//生产者类
+public class Producer implements Runnable {
+	
+	private Storage storage;
+	private String name;
+	
+	public Producer(Storage storage, String name) {
+		this.storage = storage;
+		this.name = name;
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				storage.produce();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+```
+
+```
+//消费者类
+public class Consumer implements Runnable {
+	
+	private Storage storage;
+	private String name;
+	
+	public Consumer(Storage storage, String name) {
+		this.storage = storage;
+		this.name = name;
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				storage.consume();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	} 
+}
+```
+
+```
+public class Main {
+	public static void main(String[] args) {
+		
+		Storage storage = new Storage();
+		new Thread(new Consumer(storage, "消费者1")).start();
+		new Thread(new Consumer(storage, "消费者2")).start();
+		new Thread(new Consumer(storage, "消费者3")).start();
+		
+		new Thread(new Producer(storage, "生产者1")).start();
+		new Thread(new Producer(storage, "生产者2")).start();
+		new Thread(new Producer(storage, "生产者3")).start();
+	}
+}
+```
+
+#### 方法二    await\(\) / signal\(\)方法
+
+```
+//仓库类
+public class Storage {
+	
+	public final int MAX_NUM = 5;
+	private int number = 0;
+	// 仓库存储的载体 
+    	private LinkedList<Object> list = new LinkedList<>();
+	
+	//锁
+	private final Lock lock = new ReentrantLock();
+	//条件变量
+	private final Condition condition = lock.newCondition();
+	
+	public void produce() {
+		lock.lock();
+		try {
+			while(number == MAX_NUM) {
+				System.out.println("box is full,size = " + number);
+				condition.await();
+			}
+			
+			list.add()new Object();
+			number++;
+			System.out.println("produce success number = " + number);
+			condition.signalAll();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			lock.unlock();
+		}
+		
+	}
+	
+	public void consume() {
+		lock.lock();
+		
+		try {
+			while (number == 0) {
+				System.out.println("box is empty,size = " + number);
+				condition.await();
+			}
+			
+			list.remove();
+			number--;
+			System.out.println("consume success number = " + number);
+			condition.signalAll();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			lock.unlock();
+		}
+	}
 }
 ```
 

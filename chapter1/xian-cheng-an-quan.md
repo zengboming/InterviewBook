@@ -11,7 +11,8 @@ Java 内存模型规定和指引Java 程序在不同的内存架构、CPU 和操
 1. **可见性**
    多个线程之间是不能互相传递数据通信的，它们之间的沟通只能通过共享变量来进行。Java内存模型规定了JVM有主内存，主内存是多个线程共享的\(堆空间和方法区是线程共享的，这里主内存应该说的是堆\)。当new一个对象的时候，也是被分配在主内存中，每个线程都有自己的工作内存，工作内存存储了主存的某些对象的副本。当一个共享变量在多个线程的工作内存中都有副本时，如果一个线程修改了这个共享变量，那么其他线程应该能够看到这个被修改后的值，这就是多线程的可见性问题。
 2. **有序性**
-   线程在引用变量时不能直接从主内存中引用,如果线程工作内存中没有该变量,则会从主内存中拷贝一个副本到工作内存中。 线程不能直接为主存中中字段赋值，它会将值指定给工作内存中的变量副本\(assign\),   完成后这个变量副本会同步到主存储区。
+   线程在引用变量时不能直接从主内存中引用,如果线程工作内存中没有该变量,则会从主内存中拷贝一个副本到工作内存中。 线程不能直接为主存中中字段赋值，它会将值指定给工作内存中的变量副本\(assign\),
+   完成后这个变量副本会同步到主存储区。
 3. 当线程操作某个对象时，执行顺序如下：
    1. 从主存复制变量到当前工作内存 \(read and load\)
    2. 执行代码，改变共享变量值 \(use and assign\)
@@ -28,22 +29,61 @@ Java 内存模型规定和指引Java 程序在不同的内存架构、CPU 和操
    4. 对这些变量计算 
    5. 将变量从工作内存写回到主存 
    6. 释放锁
-2. **volatile变量**
-   volatile是java提供的一种同步手段，只不过它是轻量级的同步，为什么这么说，因为volatile只能保证多线程的内存可见性，不能保证多线程的执行有序性。任何被volatile修饰的变量，都不拷贝副本到工作内存，任何修改都及时写在主存。因此对于Valatile修饰的变量的修改，所有线程马上就能看到，但是volatile不能保证对变量的修改是有序的。
-   使用方法：volatile int a;
-   使用volatile的条件：
-   1. 对变量的写操作不依赖于当前值。 \(比如i++就不行,因为不是原子操作\) 
+2. **volatile变量**  
+   volatile是java提供的一种同步手段，只不过它是轻量级的同步，为什么这么说，因为volatile只能保证多线程的内存可见性，不能保证多线程的执行有序性。任何被volatile修饰的变量，都不拷贝副本到工作内存，任何修改都及时写在主存。因此对于Valatile修饰的变量的修改，所有线程马上就能看到，但是volatile不能保证对变量的修改是有序的。  
+   使用方法：volatile int a;  
+   使用volatile的条件：  
+   1. 对变量的写操作不依赖于当前值。 \(比如i++就不行,因为不是原子操作\)   
    2. 该变量没有包含在具有其他变量的不变式中。（变量不需要与其他的状态变量共同参与不变约束。）
 
-   使用volatile的场景：
-   1. 状态标志。将 volatile 变量作为状态标志使用
-   2. 一次性安全发布。将对象引用定义为 volatile 类型
-   3. 独立观察
-   4. volatile bean 模式
-   5. 开销较低的读－写锁策略。结合使用volatile和synchronized实现“开销较低的读－写锁”
+   使用volatile的场景：  
+   1. 状态标志。将 volatile 变量作为状态标志使用  
+   2. 一次性安全发布。将对象引用定义为 volatile 类型  
+   3. 独立观察  
+   4. volatile bean 模式  
+   5. 开销较低的读－写锁策略。结合使用volatile和synchronized实现“开销较低的读－写锁”  
    6. 保证对于64位long和double的读取是原子性。在JMM中允许虚拟机对未被volatile修饰的64位的long和double读写操作分为2次32位的操作来执行，这也就是所谓的long和double的非原子性协定。
-3. **锁机制**（同步块、就绪队列、阻塞队列）
-   调用锁的wait\(\)方法，让线程主动释放锁。执行lock.wait\(\)，那么这个线程会进入到lock的阻塞队列。如果调用 lock.notify\(\)则会通知阻塞队列的某个线程进入就绪队列。
+
+3. **Lock**
+   采用lock，必须主动释放锁，并且在发生异常时，不会自动释放锁。因此一般来说，使用Lock必须在try{}catch{}块中进行，并且将释放锁的操作放在finally块中进行，以保证锁一定被释放，防止死锁的发生。
+
+   ```
+   public static class Account
+   {
+       private static Lock lock = new ReentrantLock();
+       private int balance =0;
+       public int getBalance()
+       {
+           return balance;
+       }
+       public  void deposit(int amount)
+       {
+           lock.lock();
+           try{
+               int newBalance = balance + amount;
+               Thread.sleep(4);   
+               balance= newBalance;
+           }catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+           finally{
+               lock.unlock();
+           }
+       }
+   }
+   ```
+
+#### Lock和Synchronized区别
+
+1. Lock是一个接口，而synchronized是Java中的关键字，synchronized是内置的语言实现；
+
+2. synchronized在发生异常时，会自动释放线程占有的锁，因此不会导致死锁现象发生；而Lock在发生异常时，如果没有主动通过unLock\(\)去释放锁，则很可能造成死锁现象，因此使用Lock时需要在finally块中释放锁；
+
+3. Lock可以让等待锁的线程响应中断，而synchronized却不行，使用synchronized时，等待的线程会一直等待下去，不能够响应中断；lock是可中断的锁，而synchronized是不可中断锁。lock只能中断等待锁的线程，不能中断正在执行的线程。
+
+4. 通过Lock可以知道有没有成功获取锁，而synchronized却无法办到。
+
+5. Lock可以提高多个线程进行读操作的效率。
 
 
 
