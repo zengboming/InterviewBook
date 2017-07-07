@@ -13,6 +13,7 @@
   * [反射](chapter1/fan-she.md)
   * [泛型](chapter1/fan-xing.md)
   * [线程安全](chapter1/xian-cheng-an-quan.md)
+  * [值传递和引用传递](chapter1/zhi-chuan-di-he-yin-yong-chuan-di.md)
 * JAVA框架
 * [计算机网络](javate-dian.md)
 * 操作系统
