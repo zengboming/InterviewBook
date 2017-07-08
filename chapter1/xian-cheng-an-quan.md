@@ -45,10 +45,10 @@ Java 内存模型规定和指引Java 程序在不同的内存架构、CPU 和操
 
    一个线程执行临界区代码过程如下：  
    1. 获得同步锁  
-   2. 清空工作内存   
-   3. 从主存拷贝变量副本到工作内存   
-   4. 对这些变量计算   
-   5. 将变量从工作内存写回到主存   
+   2. 清空工作内存  
+   3. 从主存拷贝变量副本到工作内存  
+   4. 对这些变量计算  
+   5. 将变量从工作内存写回到主存  
    6. 释放锁
 
 2. **volatile变量**
@@ -63,7 +63,7 @@ Java 内存模型规定和指引Java 程序在不同的内存架构、CPU 和操
 
       1\) 当程序执行到volatile变量的读操作或者写操作时，在其前面的操作的更改肯定全部已经进行，且结果已经对后面的操作可见；在其后面的操作肯定还没有进行；
 
-       2\) 在进行指令优化时，不能将在对volatile变量访问的语句放在其后面执行，也不能把volatile变量后面的语句放到其前面执行。
+      2\) 在进行指令优化时，不能将在对volatile变量访问的语句放在其后面执行，也不能把volatile变量后面的语句放到其前面执行。
 
    使用方法：volatile int a;  
    使用volatile的条件：  
@@ -79,7 +79,7 @@ Java 内存模型规定和指引Java 程序在不同的内存架构、CPU 和操
    //线程1:
    context = loadContext();  
    inited = true;              
- 
+
    //线程2:
    while(!inited ){
    sleep()
@@ -94,7 +94,7 @@ Java 内存模型规定和指引Java 程序在不同的内存架构、CPU 和操
    while(!stop){
        doSomething();
    }
- 
+
    //线程2
    stop = true;
    //小概率线程1会无限循环，出现的情况是：线程1从主内存读取stop到工作内存，线程2从主内存读取stop到工作内存，然后修改他的值，
@@ -109,18 +109,18 @@ Java 内存模型规定和指引Java 程序在不同的内存架构、CPU 和操
    volatile boolean stop = false;
    ```
 
-   2. 保证对于64位long和double的读取是原子性。在JMM中允许虚拟机对未被volatile修饰的64位的long和double读写操作分为2次32位的操作来执行，这也就是所谓的long和double的非原子性协定。
+   1. 保证对于64位long和double的读取是原子性。在JMM中允许虚拟机对未被volatile修饰的64位的long和double读写操作分为2次32位的操作来执行，这也就是所谓的long和double的非原子性协定。
 
-   3. Double check
+   2. Double check
 
    ```
    class Singleton{
        private volatile static Singleton instance = null;
- 
+
        private Singleton() {
- 
+
        }
- 
+
        public static Singleton getInstance() {
            if(instance==null) {
                synchronized (Singleton.class) {
