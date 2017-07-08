@@ -22,5 +22,4 @@
   * [生产者消费者模式](sheng-chan-zhe-xiao-fei-zhe-mo-shi.md)
 * 数据库
 * 云计算
-* JAVA框架
 

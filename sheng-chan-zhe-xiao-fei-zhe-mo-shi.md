@@ -27,14 +27,14 @@ public class Storage {
             while (number == MAX_NUM) {
                 System.out.println("box is full,size = " + number);
                 //阻塞,线程等待,释放锁
-                obj.wait();
+                list.wait();
             }
-            
+
             list.add(new Object());
             number++;
             System.out.println("produce success number = " + number);
             //唤醒当前对象的所有等待的线程
-            obj.notifyAll();
+            list.notifyAll();
         }
     }
 
@@ -44,13 +44,13 @@ public class Storage {
             while (number == 0) {
                 System.out.println("box is empty,size = " + number);
                 //阻塞
-                obj.wait();
+                list.wait();
             }
 
             list.remove();
             number--;
             System.out.println("comsume success number = " + number);
-            obj.notifyAll();
+            list.notifyAll();
         }
     }
 
@@ -60,67 +60,67 @@ public class Storage {
 ```
 //生产者类
 public class Producer implements Runnable {
-	
-	private Storage storage;
-	private String name;
-	
-	public Producer(Storage storage, String name) {
-		this.storage = storage;
-		this.name = name;
-	}
 
-	@Override
-	public void run() {
-		while (true) {
-			try {
-				storage.produce();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+    private Storage storage;
+    private String name;
+
+    public Producer(Storage storage, String name) {
+        this.storage = storage;
+        this.name = name;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                storage.produce();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
 ```
 
 ```
 //消费者类
 public class Consumer implements Runnable {
-	
-	private Storage storage;
-	private String name;
-	
-	public Consumer(Storage storage, String name) {
-		this.storage = storage;
-		this.name = name;
-	}
 
-	@Override
-	public void run() {
-		while (true) {
-			try {
-				storage.consume();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		
-	} 
+    private Storage storage;
+    private String name;
+
+    public Consumer(Storage storage, String name) {
+        this.storage = storage;
+        this.name = name;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                storage.consume();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    } 
 }
 ```
 
 ```
 public class Main {
-	public static void main(String[] args) {
-		
-		Storage storage = new Storage();
-		new Thread(new Consumer(storage, "消费者1")).start();
-		new Thread(new Consumer(storage, "消费者2")).start();
-		new Thread(new Consumer(storage, "消费者3")).start();
-		
-		new Thread(new Producer(storage, "生产者1")).start();
-		new Thread(new Producer(storage, "生产者2")).start();
-		new Thread(new Producer(storage, "生产者3")).start();
-	}
+    public static void main(String[] args) {
+
+        Storage storage = new Storage();
+        new Thread(new Consumer(storage, "消费者1")).start();
+        new Thread(new Consumer(storage, "消费者2")).start();
+        new Thread(new Consumer(storage, "消费者3")).start();
+
+        new Thread(new Producer(storage, "生产者1")).start();
+        new Thread(new Producer(storage, "生产者2")).start();
+        new Thread(new Producer(storage, "生产者3")).start();
+    }
 }
 ```
 
@@ -129,56 +129,56 @@ public class Main {
 ```
 //仓库类
 public class Storage {
-	
-	public final int MAX_NUM = 5;
-	private int number = 0;
-	// 仓库存储的载体 
-    	private LinkedList<Object> list = new LinkedList<>();
-	
-	//锁
-	private final Lock lock = new ReentrantLock();
-	//条件变量
-	private final Condition condition = lock.newCondition();
-	
-	public void produce() {
-		lock.lock();
-		try {
-			while(number == MAX_NUM) {
-				System.out.println("box is full,size = " + number);
-				condition.await();
-			}
-			
-			list.add()new Object();
-			number++;
-			System.out.println("produce success number = " + number);
-			condition.signalAll();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
-			lock.unlock();
-		}
-		
-	}
-	
-	public void consume() {
-		lock.lock();
-		
-		try {
-			while (number == 0) {
-				System.out.println("box is empty,size = " + number);
-				condition.await();
-			}
-			
-			list.remove();
-			number--;
-			System.out.println("consume success number = " + number);
-			condition.signalAll();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
-			lock.unlock();
-		}
-	}
+
+    public final int MAX_NUM = 5;
+    private int number = 0;
+    // 仓库存储的载体 
+    private LinkedList<Object> list = new LinkedList<>();
+
+    //锁
+    private final Lock lock = new ReentrantLock();
+    //条件变量
+    private final Condition condition = lock.newCondition();
+
+    public void produce() {
+        lock.lock();
+        try {
+            while(number == MAX_NUM) {
+                System.out.println("box is full,size = " + number);
+                condition.await();
+            }
+
+            list.add()new Object();
+            number++;
+            System.out.println("produce success number = " + number);
+            condition.signalAll();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+
+    }
+
+    public void consume() {
+        lock.lock();
+
+        try {
+            while (number == 0) {
+                System.out.println("box is empty,size = " + number);
+                condition.await();
+            }
+
+            list.remove();
+            number--;
+            System.out.println("consume success number = " + number);
+            condition.signalAll();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
 }
 ```
 
