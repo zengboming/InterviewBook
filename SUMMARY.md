@@ -8,7 +8,7 @@
   * [内存泄漏](chapter1/nei-cun-xie-lou.md)
   * [GC](chapter1/gcyuan-li.md)
   * [内存管理](chapter1/nei-cun.md)
-  * [线程安全](chapter1/xian-cheng-an-quan.md)
+  * [线程安全、内存模型](chapter1/xian-cheng-an-quan.md)
   * [集合类](chapter1/ji-he-lei.md)
   * [反射](chapter1/fan-she.md)
   * [泛型](chapter1/fan-xing.md)

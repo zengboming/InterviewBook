@@ -148,7 +148,7 @@ public class Storage {
                 condition.await();
             }
 
-            list.add()new Object();
+            list.add(new Object());
             number++;
             System.out.println("produce success number = " + number);
             condition.signalAll();
