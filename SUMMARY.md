@@ -26,7 +26,7 @@
   * [线程和进程](cao-zuo-xi-tong/xian-cheng-he-jin-cheng.md)
   * [中断](cao-zuo-xi-tong/si-suo.md)
   * [Windows内存管理方式](cao-zuo-xi-tong/windowsnei-cun-guan-li-fang-shi.md)
-  * 磁盘和文件
+  * [磁盘和文件](cao-zuo-xi-tong/ci-pan-he-wen-jian.md)
   * [死锁](cao-zuo-xi-tong/zhong-duan.md)
 * [算法与数据结构](suan-fa-yu-shu-ju-jie-gou.md)
 * 设计模式
