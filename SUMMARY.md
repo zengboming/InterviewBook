@@ -24,11 +24,9 @@
   * [IP地址分类](javate-dian/ipdi-zhi-fen-lei.md)
 * [操作系统](cao-zuo-xi-tong.md)
   * [线程和进程](cao-zuo-xi-tong/xian-cheng-he-jin-cheng.md)
-  * [死锁](cao-zuo-xi-tong/si-suo.md)
-  * Windows内存管理方式
-  * IPC通信
+  * [中断](cao-zuo-xi-tong/si-suo.md)
+  * [Windows内存管理方式](cao-zuo-xi-tong/windowsnei-cun-guan-li-fang-shi.md)
   * 磁盘和文件
-  * 中断
 * [算法与数据结构](suan-fa-yu-shu-ju-jie-gou.md)
 * 设计模式
   * [生产者消费者模式](sheng-chan-zhe-xiao-fei-zhe-mo-shi.md)
