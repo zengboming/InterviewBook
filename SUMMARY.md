@@ -27,6 +27,7 @@
   * [中断](cao-zuo-xi-tong/si-suo.md)
   * [Windows内存管理方式](cao-zuo-xi-tong/windowsnei-cun-guan-li-fang-shi.md)
   * 磁盘和文件
+  * [死锁](cao-zuo-xi-tong/zhong-duan.md)
 * [算法与数据结构](suan-fa-yu-shu-ju-jie-gou.md)
 * 设计模式
   * [生产者消费者模式](sheng-chan-zhe-xiao-fei-zhe-mo-shi.md)
