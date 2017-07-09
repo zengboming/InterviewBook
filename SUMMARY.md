@@ -21,6 +21,7 @@
   * [HTTP](javate-dian/http.md)
   * [网络攻击](javate-dian/wang-luo-gong-ji.md)
   * [Socket](javate-dian/socket.md)
+  * [IP地址分类](javate-dian/ipdi-zhi-fen-lei.md)
 * 操作系统
 * [算法与数据结构](suan-fa-yu-shu-ju-jie-gou.md)
 * 设计模式
