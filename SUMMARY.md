@@ -29,6 +29,8 @@
   * [磁盘和文件](cao-zuo-xi-tong/ci-pan-he-wen-jian.md)
   * [死锁](cao-zuo-xi-tong/zhong-duan.md)
 * [算法与数据结构](suan-fa-yu-shu-ju-jie-gou.md)
+  * [链表有环](suan-fa-yu-shu-ju-jie-gou/lian-biao-you-huan.md)
+  * [树](suan-fa-yu-shu-ju-jie-gou/shu.md)
 * 设计模式
   * [生产者消费者模式](sheng-chan-zhe-xiao-fei-zhe-mo-shi.md)
 * 数据库
