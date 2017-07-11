@@ -16,6 +16,7 @@
   * [for和foreach](chapter1/forhe-foreach.md)
   * [equals](chapter1/equals.md)
 * JAVA框架
+  * [SSH](ssh.md)
 * [计算机网络](javate-dian.md)
   * [网络协议、结构](javate-dian/iptcpudphttp.md)
   * [握手挥手](javate-dian/wo-shou-hui-shou.md)
