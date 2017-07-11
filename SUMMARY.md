@@ -32,6 +32,7 @@
   * [链表有环](suan-fa-yu-shu-ju-jie-gou/lian-biao-you-huan.md)
   * [树](suan-fa-yu-shu-ju-jie-gou/shu.md)
 * 设计模式
+  * [面向对象](mian-xiang-dui-xiang.md)
   * [生产者消费者模式](sheng-chan-zhe-xiao-fei-zhe-mo-shi.md)
 * 数据库
   * [索引](suo-yin.md)
