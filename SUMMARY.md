@@ -14,6 +14,7 @@
   * [泛型](chapter1/fan-xing.md)
   * [值传递和引用传递](chapter1/zhi-chuan-di-he-yin-yong-chuan-di.md)
   * [for和foreach](chapter1/forhe-foreach.md)
+  * [equals](chapter1/equals.md)
 * JAVA框架
 * [计算机网络](javate-dian.md)
   * [网络协议、结构](javate-dian/iptcpudphttp.md)
