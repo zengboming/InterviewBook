@@ -40,5 +40,6 @@
   * [索引](suo-yin.md)
   * [事务](shi-wu.md)
   * [锁](suo.md)
+  * [范式](fan-shi.md)
 * 云计算
 
