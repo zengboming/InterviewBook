@@ -35,7 +35,7 @@
   * [生产者消费者模式](sheng-chan-zhe-xiao-fei-zhe-mo-shi.md)
 * 数据库
   * [索引](suo-yin.md)
-  * 事务
+  * [事务](shi-wu.md)
   * [锁](suo.md)
 * 云计算
 
