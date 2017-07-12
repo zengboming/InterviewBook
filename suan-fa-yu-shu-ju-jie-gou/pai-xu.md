@@ -6,40 +6,36 @@
 
 时间复杂，空间复杂度，稳定性：![](/assets/739525-20160503202729044-614991035.jpg)
 
-
-
 ### 1.直接插入排序 {#1直接插入排序}
 
 **思想**：每次将一个待排序的数据按照其关键字的大小插入到前面已经排序好的数据中的适当位置，直到全部数据排序完成。**时间复杂度**：O\(n2\) O\(n\) O\(n2\) （最坏 最好 平均）**空间复杂度**：O\(1\)**稳定性**： 稳定 每次都是在前面已排好序的序列中找到适当的位置，只有小的数字会往前插入，所以原来相同的两个数字在排序后相对位置不变。 代码：
 
 ```
-/**
- * 插入排序
- * @param array
- */
-public static void insertSort(int[] array) {
-    for (int i = 2; i 
-<
- array.length; i++ ) {
-        int val = array[i];
-        int j = i -1;
-        while (j 
->
-= 0 
-&
-&
- array[j] 
->
- val) {  // array[j] 
->
- val
-            array[j+1] = array[j];
-            j--;
-        }
-        array[j+1] = val; //  array[j+1] 不是array[j]
-    }
+public class InsertSort {
+	
+	public static void insert(int[] a) {
+		int length = a.length;
+		for (int i = 1; i < length; i++ ) {
+			if (a[i] < a[i-1]) {
+				int j = i-1;
+				int temp = a[i];
+				while (j >= 0 && temp < a[j]) {
+					a[j+1] = a[j];
+					j--;
+				}
+				a[j+1] = temp;
+			}
+		}
+	}
+	
+	public static void main(String args[]) {
+		int a[] = {3,1,5,7,2,4,9,6};  
+		insert(a);
+		for (int i = 0; i < a.length; i++) {
+			System.out.print(a[i]);
+		}
+	}
 }
-
 ```
 
 ### 2.希尔排序 {#2希尔排序}
@@ -50,22 +46,11 @@ public static void insertSort(int[] array) {
 public static void shellSort(int[] array) {
     int len;
     len = array.length / 2; // 分成n/2组
-    while (len 
->
-= 1) {
-        for (int i = len; i 
-<
- array.length; ++i) { //对每组进行直接插入排序
+    while (len >= 1) {
+        for (int i = len; i < array.length; ++i) { //对每组进行直接插入排序
             int temp = array[i];
             int j = i - len;
-            while (j 
->
-= 0 
-&
-&
- array[j] 
->
- temp) {
+            while (j >= 0 && array[j] > temp) {
                 array[j + len] = array[j];
                 j -= len;
             }
@@ -75,10 +60,7 @@ public static void shellSort(int[] array) {
     }
 
 }
-
 ```
-
-
 
 ### 3.冒泡排序 {#3冒泡排序}
 
@@ -87,24 +69,14 @@ public static void shellSort(int[] array) {
 ```
 public static void bubbleSort(int[] array) {
     boolean flag; // 用来判断当前这一轮是否有交换数值,若没有则表示已经排好许了
-    for (int i = 0; i 
-<
- array.length; i++) {
+    for (int i = 0; i < array.length; i++) {
         flag = false;
         /**
-         * 这边要注意 for (int j = array.length -1; j 
->
-= i + 1; j--)。 不要写成
-         * for (int j =  i + 1; j 
-<
- array.length ; j++)
+         * 这边要注意 for (int j = array.length -1; j >= i + 1; j--)。 不要写成
+         * for (int j =  i + 1; j < array.length ; j++)
          */
-        for (int j = array.length -1; j 
->
-= i + 1; j--) {
-            if (array[j -1 ] 
->
- array[j]) {
+        for (int j = array.length -1; j >= i + 1; j--) {
+            if (array[j -1 ] > array[j]) {
                 //数据交换
                 int temp = array[j - 1];
                 array[j - 1] = array[j];
@@ -118,7 +90,6 @@ public static void bubbleSort(int[] array) {
         }
     }
 }
-
 ```
 
 ### 4.快速排序 {#4快速排序}
@@ -131,9 +102,7 @@ public static void quickSort(int[] array) {
 }
 
 private static void partition(int[] array, int low, int high) {
-    if (low 
-<
- high) {
+    if (low < high) {
         int p = quickSort(array, low, high);
         partition(array, low, p - 1);
         partition(array, p + 1, high);
@@ -145,44 +114,23 @@ private static int quickSort(int[] array, int left, int right) {
     int idx = random.nextInt(right - left + 1) + left;  // 这边需要注意right - left + 1 （要加1）
     exch(array, idx, left);
     int val = array[left];
-    while (left 
-<
- right) {
-        while (left 
-<
- right 
-&
-&
- array[right] 
->
- val) {
+    while (left < right) {
+        while (left < right && array[right] > val) {
             right--;
         }
-        if (left 
-<
- right) {
+        if (left < right) {
             array[left++] = array[right];
         }
-        while (left 
-<
- right 
-&
-&
- array[left] 
-<
- val) {
+        while (left < right && array[left] < val) {
             left++;
         }
-        if (left 
-<
- right) {
+        if (left < right) {
             array[right--] = array[left];
         }
     }
     array[left] = val;
     return left;
 }
-
 ```
 
 三向快速排序算法
@@ -198,23 +146,15 @@ public static void quick2waySort(int[] array) {
 }
 
 private static void quick2waySort(int[] array, int lo, int hi) {
-    if (hi 
-<
-= lo) {
+    if (hi <= lo) {
         return;
     }
     int lt = lo, gt = hi, i = lo + 1;
     int val = array[lo];
-    while (i 
-<
-= gt) {
-        if (array[i] 
-<
- val) {
+    while (i <= gt) {
+        if (array[i] < val) {
             exch(array, i++, lt++);
-        } else if (array[i] 
->
- val) {
+        } else if (array[i] > val) {
             exch(array, i, gt--);
         } else {
             i++;
@@ -224,10 +164,7 @@ private static void quick2waySort(int[] array, int lo, int hi) {
     quick2waySort(array, lo, lt - 1);
     quick2waySort(array, gt + 1, hi);
 }
-
 ```
-
-
 
 ### 5.直接选择排序 {#5直接选择排序}
 
@@ -235,23 +172,16 @@ private static void quick2waySort(int[] array, int lo, int hi) {
 
 ```
 public static void selectSort(int[] array) {
-    for (int i = 0; i 
-<
- array.length; i++) {
+    for (int i = 0; i < array.length; i++) {
         int minIdx = i;
-        for (int j = i + 1; j 
-<
- array.length; j++) {
-            if (array[j] 
-<
- array[minIdx]) {
+        for (int j = i + 1; j < array.length; j++) {
+            if (array[j] < array[minIdx]) {
                 minIdx = j;
             }
         }
         exch(array, i, minIdx);
     }
 }
-
 ```
 
 ### 6.堆排序 {#6堆排序}
@@ -261,14 +191,10 @@ public static void selectSort(int[] array) {
 ```
 public static void heapSort(int[] array) {
     int N = array.length -1;
-    for (int k = N / 2; k 
->
-= 1; k--) {
+    for (int k = N / 2; k >= 1; k--) {
         sink(array, k, N);
     }
-    while (N 
->
- 1) {
+    while (N > 1) {
         // 最大堆, 选择最大值放在最后
         exch(array, 1, N --);
         sink(array, 1, N);
@@ -276,32 +202,18 @@ public static void heapSort(int[] array) {
 }
 
 private static void sink(int[] array, int k, int N) {
-    while (2 * k 
-<
-= N) {
+    while (2 * k <= N) {
         int j = 2 * k;
-        if (j 
-<
- N 
-&
-&
- array[j] 
-<
- array[j+1]) { // 
-<
+        if (j < N && array[j] < array[j+1]) { 
 
             j++;
         }
-        if (array[j] 
-<
- array[k]) break;  // 
-<
+        if (array[j] < array[k]) break;  
 
         exch(array, k, j);
         k = j;
     }
 }
-
 ```
 
 ## 7.归并排序 {#7归并排序}
@@ -314,13 +226,8 @@ public static void mergeSort(int[] array) {
 }
 
 private static void sort(int[] array, int left, int right) {
-    if (left 
-<
- right) {
-        int middle = (left + right) 
->
->
- 1;
+    if (left < right) {
+        int middle = (left + right) >> 1;
         //递归处理相关的合并事项
         sort(array, left, middle);
         sort(array, middle + 1, right);
@@ -334,35 +241,19 @@ private static void merge(int[] array, int lo, int mid, int hi) {
     int left = lo;
     int right = mid + 1;
     int k = lo;
-    while (left 
-<
-= mid 
-&
-&
- right 
-<
-= hi) {
-        if (array[left] 
-<
- array[right])
+    while (left <= mid && right <= hi) {
+        if (array[left] < array[right])
             temp[k++] = array[left++];
         else
             temp[k++] = array[right++];
     }
     //处理剩余未合并的部分
-    while (left 
-<
-= mid)  temp[k++] = array[left++];
-    while (right 
-<
-= hi)  temp[k++] = array[right++];
+    while (left <= mid)  temp[k++] = array[left++];
+    while (right <= hi)  temp[k++] = array[right++];
     //将临时数组中的内容存储到原数组中
-    while (lo 
-<
-= hi) array[lo] = temp[lo++];
+    while (lo <= hi) array[lo] = temp[lo++];
 
 }
-
 ```
 
 ## 8.基数排序算法 {#8基数排序算法}
