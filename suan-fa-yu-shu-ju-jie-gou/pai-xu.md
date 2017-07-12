@@ -11,30 +11,19 @@
 **思想**：每次将一个待排序的数据按照其关键字的大小插入到前面已经排序好的数据中的适当位置，直到全部数据排序完成。**时间复杂度**：O\(n2\) O\(n\) O\(n2\) （最坏 最好 平均）**空间复杂度**：O\(1\)**稳定性**： 稳定 每次都是在前面已排好序的序列中找到适当的位置，只有小的数字会往前插入，所以原来相同的两个数字在排序后相对位置不变。 代码：
 
 ```
-public class InsertSort {
-	
-	public static void insert(int[] a) {
-		int length = a.length;
-		for (int i = 1; i < length; i++ ) {
-			if (a[i] < a[i-1]) {
-				int j = i-1;
-				int temp = a[i];
-				while (j >= 0 && temp < a[j]) {
-					a[j+1] = a[j];
-					j--;
-				}
-				a[j+1] = temp;
-			}
-		}
-	}
-	
-	public static void main(String args[]) {
-		int a[] = {3,1,5,7,2,4,9,6};  
-		insert(a);
-		for (int i = 0; i < a.length; i++) {
-			System.out.print(a[i]);
-		}
-	}
+public static void insert(int[] a) {
+    int length = a.length;
+    for (int i = 1; i < length; i++ ) {
+        if (a[i] < a[i-1]) {
+            int j = i-1;
+            int temp = a[i];
+            while (j >= 0 && temp < a[j]) {
+                a[j+1] = a[j];
+                j--;
+            }
+            a[j+1] = temp;
+        }
+    }
 }
 ```
 
