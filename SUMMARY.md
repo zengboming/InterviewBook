@@ -15,8 +15,11 @@
   * [值传递和引用传递](chapter1/zhi-chuan-di-he-yin-yong-chuan-di.md)
   * [for和foreach](chapter1/forhe-foreach.md)
   * [equals](chapter1/equals.md)
-* JAVA框架
-  * [SSH](ssh.md)
+* [JAVA框架](javakuang-jia.md)
+  * [Struts](javakuang-jia/struts.md)
+  * [Spring](javakuang-jia/spring.md)
+  * [Hibernate](javakuang-jia/hibernate.md)
+  * Servlet
 * [计算机网络](javate-dian.md)
   * [网络协议、结构](javate-dian/iptcpudphttp.md)
   * [握手挥手](javate-dian/wo-shou-hui-shou.md)
@@ -30,8 +33,10 @@
   * [Windows内存管理方式](cao-zuo-xi-tong/windowsnei-cun-guan-li-fang-shi.md)
   * [磁盘和文件](cao-zuo-xi-tong/ci-pan-he-wen-jian.md)
   * [死锁](cao-zuo-xi-tong/zhong-duan.md)
-* [算法与数据结构](suan-fa-yu-shu-ju-jie-gou.md)
+* 算法
+  * [一致性哈希算法](suan-fa-yu-shu-ju-jie-gou/yi-zhi-xing-ha-xi.md)
   * [链表有环](suan-fa-yu-shu-ju-jie-gou/lian-biao-you-huan.md)
+* [数据结构](suan-fa-yu-shu-ju-jie-gou.md)
   * [树](suan-fa-yu-shu-ju-jie-gou/shu.md)
 * 设计模式
   * [面向对象](mian-xiang-dui-xiang.md)
@@ -42,5 +47,7 @@
   * [锁](suo.md)
   * [范式](fan-shi.md)
   * 存储引擎
-* 云计算
+* 算法
+  * 一致性哈希
+  * [链表有环](suan-fa-yu-shu-ju-jie-gou/lian-biao-you-huan.md)
 
