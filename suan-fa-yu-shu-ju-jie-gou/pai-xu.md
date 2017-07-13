@@ -32,22 +32,24 @@ public static void insert(int[] a) {
 **思想**：希尔排序根据增量值对数据按下表进行分组，对每组使用直接插入排序算法排序；随着增量逐渐减少，每组包含的关键词越来越多，当增量减至1时，整体采用直接插入排序得到有序数组，算法终止。**时间复杂度**：O\(n2\) O\(n\) O\(n1.5\) （最坏，最好，平均）**空间复杂度**：O\(1\)**稳定性**：不稳定 因为是分组进行直接插入排序，原来相同的两个数字可能会被分到不同的组去，可能会使得后面的数字会排到前面，使得两个相同的数字排序前后位置发生变化。**不稳定举例**: 4 3 3 2 按2为增量分组，则第二个3会跑到前面**代码**：
 
 ```
-public static void shellSort(int[] array) {
-    int len;
-    len = array.length / 2; // 分成n/2组
-    while (len >= 1) {
-        for (int i = len; i < array.length; ++i) { //对每组进行直接插入排序
-            int temp = array[i];
-            int j = i - len;
-            while (j >= 0 && array[j] > temp) {
-                array[j + len] = array[j];
-                j -= len;
-            }
-            array[j + len] = temp;
-        }
-        len /= 2;
-    }
-
+public void ShellSort(int[] a) {
+	int length = a.length;
+	int n = length/2;
+	while (n >= 1) {
+		for (int i = n; i < length ; i++) {
+			//插入排序
+			if (a[i] < a[i-n]) {
+				int temp = a[i];
+				int j = i-n;
+				while (j >= 0 && temp < a[j]) {
+					a[j+n] = a[j];
+					j -= n;
+				}
+				a[j+n] = temp;
+			}
+		}
+		n /= 2;
+	}
 }
 ```
 

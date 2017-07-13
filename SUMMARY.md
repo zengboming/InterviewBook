@@ -48,7 +48,4 @@
   * [锁](suo.md)
   * [范式](fan-shi.md)
   * 存储引擎
-* 算法
-  * 一致性哈希
-  * [链表有环](suan-fa-yu-shu-ju-jie-gou/lian-biao-you-huan.md)
 
