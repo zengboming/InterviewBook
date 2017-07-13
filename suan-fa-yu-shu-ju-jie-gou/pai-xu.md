@@ -11,7 +11,7 @@
 **思想**：每次将一个待排序的数据按照其关键字的大小插入到前面已经排序好的数据中的适当位置，直到全部数据排序完成。**时间复杂度**：O\(n2\) O\(n\) O\(n2\) （最坏 最好 平均）**空间复杂度**：O\(1\)**稳定性**： 稳定 每次都是在前面已排好序的序列中找到适当的位置，只有小的数字会往前插入，所以原来相同的两个数字在排序后相对位置不变。 代码：
 
 ```
-public static void insert(int[] a) {
+public void InsertSort(int[] a) {
     int length = a.length;
     for (int i = 1; i < length; i++ ) {
         if (a[i] < a[i-1]) {
@@ -33,23 +33,23 @@ public static void insert(int[] a) {
 
 ```
 public void ShellSort(int[] a) {
-	int length = a.length;
-	int n = length/2;
-	while (n >= 1) {
-		for (int i = n; i < length ; i++) {
-			//插入排序
-			if (a[i] < a[i-n]) {
-				int temp = a[i];
-				int j = i-n;
-				while (j >= 0 && temp < a[j]) {
-					a[j+n] = a[j];
-					j -= n;
-				}
-				a[j+n] = temp;
-			}
-		}
-		n /= 2;
-	}
+    int length = a.length;
+    int n = length/2;
+    while (n >= 1) {
+        for (int i = n; i < length ; i++) {
+            //插入排序
+            if (a[i] < a[i-n]) {
+                int temp = a[i];
+                int j = i-n;
+                while (j >= 0 && temp < a[j]) {
+                    a[j+n] = a[j];
+                    j -= n;
+                }
+                a[j+n] = temp;
+            }
+        }
+        n /= 2;
+    }
 }
 ```
 
@@ -162,16 +162,59 @@ private static void quick2waySort(int[] array, int lo, int hi) {
 **思想**：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后每次从剩余未排序元素中继续寻找最小（大）元素放到已排序序列的末尾。以此类推，直到所有元素均排序完毕**时间复杂度**：最坏:O\(n2\) 最好: O\(n2\) 平均: O\(n2\)**空间复杂度**：O\(1\)**稳定性**：不稳定 例如数组 2 2 1 3 第一次选择的时候把第一个2与1交换使得两个2的相对次序发生了改变。**代码**：
 
 ```
-public static void selectSort(int[] array) {
-    for (int i = 0; i < array.length; i++) {
-        int minIdx = i;
-        for (int j = i + 1; j < array.length; j++) {
-            if (array[j] < array[minIdx]) {
-                minIdx = j;
-            }
-        }
-        exch(array, i, minIdx);
-    }
+public void SimpleSelectSort(int[] a) {
+	int length = a.length;
+	for (int i = 0; i < length ; i++) {
+		int pos = i;
+		for (int j = i + 1; j < length; j++) {
+			if (a[j] < a[pos]) {
+				pos = j;
+			}
+		}
+		if (pos != i) {
+			int temp = a[pos];
+			a[pos] = a[i];
+			a[i] = temp;
+		}
+	}
+}
+```
+
+#### 二元选择排序
+
+简单选择排序，每趟循环只能确定一个元素排序后的定位。我们可以考虑改进为每趟循环确定两个元素（当前趟最大和最小记录）的位置,从而减少排序所需的循环次数。改进后对n个数据进行排序，最多只需进行\[n/2\]趟循环即可。
+
+```
+//二元选择排序：每次确定两个数（最大和最小）
+public void DoubleSelectSort(int[] a) {
+	int length = a.length;
+	for (int i = 0; i < length/2 ; i++) {
+		int min = i;
+		int max = i;
+		for (int j = i + 1; j <= length - i - 1; j++) {
+			if (a[j] < a[min]) {
+				min = j;
+				continue;
+			}
+			if (a[j] > a[max]) {
+				max = j;
+			}
+		}
+		if (min != i) {
+			int temp = a[min];
+			a[min] = a[i];
+			a[i] = temp;
+		}
+		if (max != i) {
+			int temp = a[max];
+			a[max] = a[length - i - 1];
+			a[length - i - 1] = temp;
+		} else { //max == i 的情况，此时 a[i] 已经改变了
+			int temp = a[min];
+			a[min] = a[length - i - 1];
+			a[length - i - 1] = temp;
+		}
+	}
 }
 ```
 
