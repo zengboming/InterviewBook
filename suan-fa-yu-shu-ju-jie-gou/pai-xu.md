@@ -59,25 +59,13 @@ public void ShellSort(int[] a) {
 
 ```
 public static void bubbleSort(int[] array) {
-    boolean flag; // 用来判断当前这一轮是否有交换数值,若没有则表示已经排好许了
     for (int i = 0; i < array.length; i++) {
-        flag = false;
-        /**
-         * 这边要注意 for (int j = array.length -1; j >= i + 1; j--)。 不要写成
-         * for (int j =  i + 1; j < array.length ; j++)
-         */
         for (int j = array.length -1; j >= i + 1; j--) {
             if (array[j -1 ] > array[j]) {
-                //数据交换
                 int temp = array[j - 1];
                 array[j - 1] = array[j];
                 array[j] = temp;
-                //设置标志位
-                flag = true;
             }
-        }
-        if (!flag) {
-            break;
         }
     }
 }
@@ -163,20 +151,20 @@ private static void quick2waySort(int[] array, int lo, int hi) {
 
 ```
 public void SimpleSelectSort(int[] a) {
-	int length = a.length;
-	for (int i = 0; i < length ; i++) {
-		int pos = i;
-		for (int j = i + 1; j < length; j++) {
-			if (a[j] < a[pos]) {
-				pos = j;
-			}
-		}
-		if (pos != i) {
-			int temp = a[pos];
-			a[pos] = a[i];
-			a[i] = temp;
-		}
-	}
+    int length = a.length;
+    for (int i = 0; i < length ; i++) {
+        int pos = i;
+        for (int j = i + 1; j < length; j++) {
+            if (a[j] < a[pos]) {
+                pos = j;
+            }
+        }
+        if (pos != i) {
+            int temp = a[pos];
+            a[pos] = a[i];
+            a[i] = temp;
+        }
+    }
 }
 ```
 
@@ -187,34 +175,34 @@ public void SimpleSelectSort(int[] a) {
 ```
 //二元选择排序：每次确定两个数（最大和最小）
 public void DoubleSelectSort(int[] a) {
-	int length = a.length;
-	for (int i = 0; i < length/2 ; i++) {
-		int min = i;
-		int max = i;
-		for (int j = i + 1; j <= length - i - 1; j++) {
-			if (a[j] < a[min]) {
-				min = j;
-				continue;
-			}
-			if (a[j] > a[max]) {
-				max = j;
-			}
-		}
-		if (min != i) {
-			int temp = a[min];
-			a[min] = a[i];
-			a[i] = temp;
-		}
-		if (max != i) {
-			int temp = a[max];
-			a[max] = a[length - i - 1];
-			a[length - i - 1] = temp;
-		} else { //max == i 的情况，此时 a[i] 已经改变了
-			int temp = a[min];
-			a[min] = a[length - i - 1];
-			a[length - i - 1] = temp;
-		}
-	}
+    int length = a.length;
+    for (int i = 0; i < length/2 ; i++) {
+        int min = i;
+        int max = i;
+        for (int j = i + 1; j <= length - i - 1; j++) {
+            if (a[j] < a[min]) {
+                min = j;
+                continue;
+            }
+            if (a[j] > a[max]) {
+                max = j;
+            }
+        }
+        if (min != i) {
+            int temp = a[min];
+            a[min] = a[i];
+            a[i] = temp;
+        }
+        if (max != i) {
+            int temp = a[max];
+            a[max] = a[length - i - 1];
+            a[length - i - 1] = temp;
+        } else { //max == i 的情况，此时 a[i] 已经改变了
+            int temp = a[min];
+            a[min] = a[length - i - 1];
+            a[length - i - 1] = temp;
+        }
+    }
 }
 ```
 
