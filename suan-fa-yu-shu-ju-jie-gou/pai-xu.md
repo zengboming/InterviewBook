@@ -79,30 +79,31 @@ public static void bubbleSort(int[] array) {
 
 ```
 public void FastSort(int[] a, int low, int high) {
-		if (low >= high) {
-			return;
-		}
-		int begin = low;
-		int end = high;
-		int pos = a[begin];
-		while (begin < end) {
-			while (begin < end && pos <= a[end]) {
-				end--;
-			}
-			int temp = a[end];
-			a[end] = a[begin];
-			a[begin] = temp;
-			
-			while(begin < end && pos >= a[begin]) {
-				begin++;
-			}
-			temp = a[begin];
-			a[begin] = a[end];
-			a[end] = temp;
-		}
-		FastSort(a, low, begin -1 );
-		FastSort(a, begin + 1, high);
-	}
+        if (low >= high) {
+            return;
+        }
+        int begin = low;
+        int end = high;
+        int pos = a[begin];
+        while (begin < end) {
+            while (begin < end && pos <= a[end]) {
+                end--;
+            }
+            int temp = a[end];
+            a[end] = a[begin];
+            a[begin] = temp;
+
+            while(begin < end && pos >= a[begin]) {
+                begin++;
+            }
+            temp = a[begin];
+            a[begin] = a[end];
+            a[end] = temp;
+        }
+        //begin为分割点
+        FastSort(a, low, begin -1 );
+        FastSort(a, begin + 1, high);
+    }
 ```
 
 三向快速排序算法
