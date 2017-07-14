@@ -69,6 +69,8 @@ public static void bubbleSort(int[] array) {
         }
     }
 }
+
+冒泡排序两种优化方案：1.增加一个交换标志位，如果没有交换，则结束循环。2.双向冒泡。
 ```
 
 ### 4.快速排序 {#4快速排序}
@@ -76,40 +78,31 @@ public static void bubbleSort(int[] array) {
 **思想**：该算法是分治算法，首先选择一个基准元素,根据基准元素将待排序列分成两部分,一部分比基准元素小,一部分大于等于基准元素,此时基准元素在其排好序后的正确位置,然后再用同样的方法递归地排序划分的两部分。基准元素的选择对快速排序的性能影响很大，所有一般会想打乱排序数组选择第一个元素或则随机地从后面选择一个元素替换第一个元素作为基准元素。**时间复杂度**：最坏:O\(n2\) 最好: O\(nlogn\) 平均: O\(nlogn\)**空间复杂度**：O\(nlogn\)用于方法栈**稳定性**：不稳定 快排会将大于等于基准元素的关键词放在基准元素右边，加入数组 1 2 2 3 4 5 选择第二个2 作为基准元素，那么排序后 第一个2跑到了后面，相对位置发生变化。**代码**：
 
 ```
-public static void quickSort(int[] array) {
-    partition(array, 0, array.length - 1);
-}
-
-private static void partition(int[] array, int low, int high) {
-    if (low < high) {
-        int p = quickSort(array, low, high);
-        partition(array, low, p - 1);
-        partition(array, p + 1, high);
-    }
-}
-
-private static int quickSort(int[] array, int left, int right) {
-    Random random = new Random(System.currentTimeMillis());
-    int idx = random.nextInt(right - left + 1) + left;  // 这边需要注意right - left + 1 （要加1）
-    exch(array, idx, left);
-    int val = array[left];
-    while (left < right) {
-        while (left < right && array[right] > val) {
-            right--;
-        }
-        if (left < right) {
-            array[left++] = array[right];
-        }
-        while (left < right && array[left] < val) {
-            left++;
-        }
-        if (left < right) {
-            array[right--] = array[left];
-        }
-    }
-    array[left] = val;
-    return left;
-}
+public void FastSort(int[] a, int low, int high) {
+		if (low >= high) {
+			return;
+		}
+		int begin = low;
+		int end = high;
+		int pos = a[begin];
+		while (begin < end) {
+			while (begin < end && pos <= a[end]) {
+				end--;
+			}
+			int temp = a[end];
+			a[end] = a[begin];
+			a[begin] = temp;
+			
+			while(begin < end && pos >= a[begin]) {
+				begin++;
+			}
+			temp = a[begin];
+			a[begin] = a[end];
+			a[end] = temp;
+		}
+		FastSort(a, low, begin -1 );
+		FastSort(a, begin + 1, high);
+	}
 ```
 
 三向快速排序算法
