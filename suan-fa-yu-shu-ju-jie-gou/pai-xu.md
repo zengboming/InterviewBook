@@ -237,39 +237,43 @@ private static void sink(int[] array, int k, int N) {
 **思想**：归并排序采用了分治算法，首先递归将原始数组划分为若干子数组，对每个子数组进行排序。然后将排好序的子数组递归合并成一个有序的数组。**时间复杂度**：最坏:O\(nlog2n\) 最好: O\(nlog2n\) 平均: O\(nlog2n\)**空间复杂度**：O\(n\)**稳定性**：稳定**代码**：
 
 ```
-public static void mergeSort(int[] array) {
-    sort(array, 0, array.length - 1);
-}
-
-private static void sort(int[] array, int left, int right) {
-    if (left < right) {
-        int middle = (left + right) >> 1;
-        //递归处理相关的合并事项
-        sort(array, left, middle);
-        sort(array, middle + 1, right);
-        merge(array, left, middle, right);
-    }
-}
-
-private static void merge(int[] array, int lo, int mid, int hi) {
-    //创建一个临时数组用来存储合并后的数据
-    int[] temp = new int[array.length];
-    int left = lo;
-    int right = mid + 1;
-    int k = lo;
-    while (left <= mid && right <= hi) {
-        if (array[left] < array[right])
-            temp[k++] = array[left++];
-        else
-            temp[k++] = array[right++];
-    }
-    //处理剩余未合并的部分
-    while (left <= mid)  temp[k++] = array[left++];
-    while (right <= hi)  temp[k++] = array[right++];
-    //将临时数组中的内容存储到原数组中
-    while (lo <= hi) array[lo] = temp[lo++];
-
-}
+public void MergeSort(int[] a, int left, int right) {
+		if (left < right) {
+			int middle = (left + right)/2;
+			MergeSort(a, left, middle);
+			MergeSort(a, middle + 1, right);
+			merge(left, middle, right, a);
+		}
+	}
+	
+	private void merge(int left, int middle, int right, int[] a) {
+		int[] b = new int[right - left + 1]; 
+		int k = 0;
+		int low = left;
+		int rig = middle + 1;
+		while (low <= middle && rig <= right) {
+			if (a[low] < a[rig]) {
+				b[k++] = a[low++];
+			} else {
+				b[k++] = a[rig++];
+			}
+		}
+		
+		//将剩余的加入数组
+		while (low <= middle) {
+			b[k++] = a[low++];
+		}
+		
+		while (rig <= right) {
+			b[k++] = a[rig++];
+		}
+		
+		//将临时数组b的数据存回a
+		k = 0;
+		while (left <= right) {
+			a[left++] = b[k++];
+		}
+	}
 ```
 
 ## 8.基数排序算法 {#8基数排序算法}
