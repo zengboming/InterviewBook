@@ -238,42 +238,42 @@ private static void sink(int[] array, int k, int N) {
 
 ```
 public void MergeSort(int[] a, int left, int right) {
-		if (left < right) {
-			int middle = (left + right)/2;
-			MergeSort(a, left, middle);
-			MergeSort(a, middle + 1, right);
-			merge(left, middle, right, a);
-		}
-	}
-	
-	private void merge(int left, int middle, int right, int[] a) {
-		int[] b = new int[right - left + 1]; 
-		int k = 0;
-		int low = left;
-		int rig = middle + 1;
-		while (low <= middle && rig <= right) {
-			if (a[low] < a[rig]) {
-				b[k++] = a[low++];
-			} else {
-				b[k++] = a[rig++];
-			}
-		}
-		
-		//将剩余的加入数组
-		while (low <= middle) {
-			b[k++] = a[low++];
-		}
-		
-		while (rig <= right) {
-			b[k++] = a[rig++];
-		}
-		
-		//将临时数组b的数据存回a
-		k = 0;
-		while (left <= right) {
-			a[left++] = b[k++];
-		}
-	}
+    if (left < right) {
+        int middle = (left + right)/2;
+        MergeSort(a, left, middle);
+        MergeSort(a, middle + 1, right);
+        merge(left, middle, right, a);
+    }
+}
+
+private void merge(int left, int middle, int right, int[] a) {
+    int[] b = new int[right - left + 1]; 
+    int k = 0;
+    int low = left;
+    int rig = middle + 1;
+    while (low <= middle && rig <= right) {
+        if (a[low] < a[rig]) {
+            b[k++] = a[low++];
+        } else {
+            b[k++] = a[rig++];
+        }
+    }
+
+    //将剩余的加入数组
+    while (low <= middle) {
+        b[k++] = a[low++];
+    }
+
+    while (rig <= right) {
+        b[k++] = a[rig++];
+    }
+
+    //将临时数组b的数据存回a
+    k = 0;
+    while (left <= right) {
+        a[left++] = b[k++];
+    }
+}
 ```
 
 ## 8.基数排序算法 {#8基数排序算法}
