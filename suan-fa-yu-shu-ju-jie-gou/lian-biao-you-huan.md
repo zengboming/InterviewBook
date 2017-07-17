@@ -13,80 +13,112 @@
 4\) 两个链表是否相交：两个链表首尾相连，判断是否有环。
 
 ```
-typedef struct Node  
-{  
-    int val;  
-    Node *next;  
-}Node,*pNode;  
-
 public class LinkLoop {
-    //双指针判断有环
-    public boolean hasLoop(pNode head) {
-        pNode fast = head;
-        pNode slow = head;
-        while(fast != NULL && fast.next != NULL) {
-            fast = fast.next.next;
-            slow = slow.next;
-            if (fast == slow) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    //计算环的长度
-    public int loopLength(pNode head) {
-        if (!hasLoop(head)) {
-            return 0;
-        }
-        pNode fast = head;
-        pNode slow = head;
-        int length = 0;
-        bool begin = false;
-        bool again = false;
-        while( fast != NULL && fast->next != NULL) {
-            fast = fast->next->next;  
-            slow = slow->next;  
-            //超两圈后停止计数，挑出循环
-            if(fast == slow && agian == true) {
-                break; 
-            }
-            //超一圈后开始计数  
-            if(fast == slow && agian == false) {             
-                begin = true;  
-                agian = true;  
-            }  
-            //计数  
-            if(begin == true) {
-                ++length;  
-            }
-        }
-        return length;
-    }
-    
-    //求环的入口
-    public pNode findLoopEntrance(pNode head) {
-        pNode fast = pHead;  
-        pNode slow = pHead;  
-        while( fast != NULL && fast->next != NULL) {  
-            fast = fast->next->next;  
-            slow = slow->next;  
-            //如果有环，则fast会超过slow一圈  
-            if(fast == slow)  {  
-                break;  
-            }  
-        }  
-        if(fast == NULL || fast->next == NULL)  {
-            return NULL;  
-        }
-        slow = pHead;  
-        while(slow != fast) {  
-            slow = slow->next;  
-            fast = fast->next;  
-        }  
-  
-        return slow;  
-    }
+	static class Node {
+		int value;
+		Node next;
+		public Node(int value) {
+			this.value = value;
+		}
+	}
+	
+	public static boolean hasLoop(Node node) {
+		Node fast = node;
+		Node slow = node;
+		while (fast.next != null && fast.next.next != null) {
+			fast = fast.next.next;
+			slow = slow.next;
+			
+			if (fast == slow) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public static int getLoopLength(Node node) {
+		if (!hasLoop(node)) {
+			return 0;
+		}
+		Node fast = node;
+		Node slow = node;
+		boolean begin = false;
+		boolean again = false;
+		int length = 0;
+		
+		while (fast.next != null && fast.next.next != null) {
+			fast = fast.next.next;
+			slow = slow.next;
+			
+			if (begin) {
+				length++;
+			}
+			
+			if (fast == slow) {
+				if (!again) {
+					again = true;
+					begin = true;
+				} else {
+					break;
+				}
+			}
+		}
+		
+		return length;
+	}
+	
+	public static Node getLoopEntrance(Node node) {
+		if (!hasLoop(node)) {
+			return null;
+		}
+		Node fast = node;
+		Node slow = node;
+		while (fast.next != null && fast.next.next != null) {
+			fast = fast.next.next;
+			slow = slow.next;
+			
+			if (fast == slow) {
+				break;
+			}
+		}
+		
+		if (fast == null || fast.next == null) {
+			return null;
+		}
+		
+		slow = node;
+		while (slow != fast) {
+			slow = slow.next;
+			fast = fast.next;
+		}
+		
+		return slow;
+	}
+	
+	public static void main(String[] args) {
+		 Node n1 = new Node(1);  
+	     Node n2 = new Node(3);  
+	     Node n3 = new Node(6);  
+	     Node n4 = new Node(4);  
+	     Node n5 = new Node(5);  
+	     Node n6 = new Node(10); 
+	     n1.next = n2;  
+	     n2.next = n3;  
+	     n3.next = n4;  
+	     n4.next = n5;  
+	     n5.next = n6;  
+	     n6.next = n5;  
+	     boolean hasLoop = hasLoop(n1);
+	     int length = getLoopLength(n1);
+	     Node node = getLoopEntrance(n1);
+	     System.out.println(hasLoop);
+	     System.out.println(length);
+	     if (node != null) {
+	    	 System.out.println(node.value);
+	     }
+	}
 }
 ```
 
