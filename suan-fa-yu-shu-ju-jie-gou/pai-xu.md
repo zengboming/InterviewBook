@@ -205,30 +205,44 @@ public void DoubleSelectSort(int[] a) {
 **思想**：堆排序是利用堆的性质进行的一种选择排序，先将排序元素构建一个最大堆,每次堆中取出最大的元素并调整堆。将该取出的最大元素放到已排好序的序列前面。这种方法相对选择排序，时间复杂度更低，效率更高。**时间复杂度**：最坏:O\(nlog2n\) 最好: O\(nlog2n\) 平均: O\(nlog2n\)**空间复杂度**：O\(1\)**稳定性**：不稳定 例如 5 10 15 10。 如果堆顶5先输出，则第三层的10\(最后一个10\)的跑到堆顶，然后堆稳定，继续输出堆顶，则刚才那个10跑到前面了，所以两个10排序前后的次序发生改变。**代码**：
 
 ```
-public static void heapSort(int[] array) {
-    int N = array.length -1;
-    for (int k = N / 2; k >= 1; k--) {
-        sink(array, k, N);
-    }
-    while (N > 1) {
-        // 最大堆, 选择最大值放在最后
-        exch(array, 1, N --);
-        sink(array, 1, N);
-    }
+public void HeapSort(int[] a) {
+	int length = a.length;
+	//构建初始堆
+	//最后一个非叶子结点是(length-1)/2
+	for (int i = (length - 1) / 2; i >= 0; i--) {
+		AdjustHeap(a, i, length);
+	}
+	//从最后一个序列开始调整
+	for (int i = length - 1 ; i > 0; i--){
+		//将堆顶最大元素和堆中最后一个元素
+		int temp = a[0];
+		a[0] = a[i];
+		a[i] = temp;
+			
+		AdjustHeap(a, 0, i);
+	}
 }
-
-private static void sink(int[] array, int k, int N) {
-    while (2 * k <= N) {
-        int j = 2 * k;
-        if (j < N && array[j] < array[j+1]) { 
-
-            j++;
-        }
-        if (array[j] < array[k]) break;  
-
-        exch(array, k, j);
-        k = j;
-    }
+	
+//key为待调整的元素的位置
+private void AdjustHeap(int[] a, int key, int length) {
+	//左孩子 
+	int child = 2 * key + 1; 
+	while (child < length) {
+		//找左右孩子中最大的
+		if (child + 1 < length && a[child] < a[child + 1]) {
+			child++;
+		 }
+		//如果较大的孩子大于父节点，交换，重新设置key，即下一个需要调整的位置
+		if (a[child] > a[key]) {
+			int temp = a[key];
+			a[key] = a[child];
+			a[child] = temp;
+			key = child;
+			child = 2 * key + 1;
+		} else {
+			break;
+		}	 
+	}
 }
 ```
 
