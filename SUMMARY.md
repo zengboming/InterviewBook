@@ -37,6 +37,7 @@
   * [一致性哈希算法](suan-fa-yu-shu-ju-jie-gou/yi-zhi-xing-ha-xi.md)
   * [链表有环](suan-fa-yu-shu-ju-jie-gou/lian-biao-you-huan.md)
   * [排序](suan-fa-yu-shu-ju-jie-gou/pai-xu.md)
+  * [搜索](suan-fa-yu-shu-ju-jie-gou/sou-suo.md)
 * [数据结构](suan-fa-yu-shu-ju-jie-gou.md)
   * [树](suan-fa-yu-shu-ju-jie-gou/shu.md)
 * 设计模式
