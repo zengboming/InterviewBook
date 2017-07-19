@@ -192,8 +192,6 @@
 
       ![](http://images.cnitblog.com/blog/94031/201403/290050048129679.png "B Plus tree")![](http://files.cnblogs.com/yangecnu/Bplustreebuild.gif)
 
-
-
 1. #### 分块查找
 
    分块查找又称索引顺序查找，它是顺序查找的一种改进方法。
