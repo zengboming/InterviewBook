@@ -15,6 +15,7 @@
   * [值传递和引用传递](chapter1/zhi-chuan-di-he-yin-yong-chuan-di.md)
   * [for和foreach](chapter1/forhe-foreach.md)
   * [equals](chapter1/equals.md)
+  * [String](chapter1/string.md)
 * [JAVA框架](javakuang-jia.md)
   * [Struts](javakuang-jia/struts.md)
   * [Spring](javakuang-jia/spring.md)
