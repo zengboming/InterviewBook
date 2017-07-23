@@ -35,7 +35,7 @@
   * [Windows内存管理方式](cao-zuo-xi-tong/windowsnei-cun-guan-li-fang-shi.md)
   * [磁盘和文件](cao-zuo-xi-tong/ci-pan-he-wen-jian.md)
   * [死锁](cao-zuo-xi-tong/zhong-duan.md)
-  * NIO
+  * IO
 * 算法
   * [一致性哈希算法](suan-fa-yu-shu-ju-jie-gou/yi-zhi-xing-ha-xi.md)
   * [链表有环](suan-fa-yu-shu-ju-jie-gou/lian-biao-you-huan.md)
@@ -56,4 +56,5 @@
   * [范式](fan-shi.md)
   * 存储引擎
 * [MongoDB](mongodb.md)
+* [面试内容](mian-shi-nei-rong.md)
 
