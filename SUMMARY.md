@@ -16,6 +16,7 @@
   * [for和foreach](chapter1/forhe-foreach.md)
   * [equals](chapter1/equals.md)
   * [String](chapter1/string.md)
+  * JAVA引用类型
 * [JAVA框架](javakuang-jia.md)
   * [Struts](javakuang-jia/struts.md)
   * [Spring](javakuang-jia/spring.md)
@@ -34,11 +35,14 @@
   * [Windows内存管理方式](cao-zuo-xi-tong/windowsnei-cun-guan-li-fang-shi.md)
   * [磁盘和文件](cao-zuo-xi-tong/ci-pan-he-wen-jian.md)
   * [死锁](cao-zuo-xi-tong/zhong-duan.md)
+  * NIO
 * 算法
   * [一致性哈希算法](suan-fa-yu-shu-ju-jie-gou/yi-zhi-xing-ha-xi.md)
   * [链表有环](suan-fa-yu-shu-ju-jie-gou/lian-biao-you-huan.md)
   * [排序](suan-fa-yu-shu-ju-jie-gou/pai-xu.md)
   * [搜索](suan-fa-yu-shu-ju-jie-gou/sou-suo.md)
+  * 深度优先/广度优先
+  * 最短路径
 * [数据结构](suan-fa-yu-shu-ju-jie-gou.md)
   * [树](suan-fa-yu-shu-ju-jie-gou/shu.md)
 * 设计模式
