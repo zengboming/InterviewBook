@@ -69,7 +69,7 @@ String str  = new String\("hello world"\);
 
 String str1 = new String\("hello world"\);                     str != str1\(每次new都会创建一个新的对象\)
 
-str2 == str3 \(指向同一个对象\)
+String str2 = "hello world";                                          str2 == str3 \(指向同一个对象\)
 
 String str3 = "hello world";
 
