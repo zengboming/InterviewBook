@@ -73,7 +73,7 @@ String str2 = "hello world";                                          str2 == st
 
 String str3 = "hello world";
 
-str4 == str2 \(+号连接在编译器确定\)
+String str4 = "hello" + " world";                                   str4 == str2 \(+号连接在编译器确定\)
 
 String str5 = "hello" + new String\(" world"\);               str5 != str2 \(后半段无法在编译期确定\)
 
