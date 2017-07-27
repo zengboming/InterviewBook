@@ -36,13 +36,13 @@
   * [Windows内存管理方式](cao-zuo-xi-tong/windowsnei-cun-guan-li-fang-shi.md)
   * [磁盘和文件](cao-zuo-xi-tong/ci-pan-he-wen-jian.md)
   * [死锁](cao-zuo-xi-tong/zhong-duan.md)
-  * IO
+  * [IO](cao-zuo-xi-tong/io.md)
 * 算法
   * [一致性哈希算法](suan-fa-yu-shu-ju-jie-gou/yi-zhi-xing-ha-xi.md)
   * [链表有环](suan-fa-yu-shu-ju-jie-gou/lian-biao-you-huan.md)
   * [排序](suan-fa-yu-shu-ju-jie-gou/pai-xu.md)
   * [搜索](suan-fa-yu-shu-ju-jie-gou/sou-suo.md)
-  * 深度优先/广度优先
+  * [深度优先/广度优先](suan-fa-yu-shu-ju-jie-gou/shen-du-you-5148-guang-du-you-xian.md)
   * 最短路径
 * [数据结构](suan-fa-yu-shu-ju-jie-gou.md)
   * [树](suan-fa-yu-shu-ju-jie-gou/shu.md)
@@ -50,7 +50,7 @@
   * [面向对象](mian-xiang-dui-xiang.md)
   * [生产者消费者模式](sheng-chan-zhe-xiao-fei-zhe-mo-shi.md)
   * 单例模式
-* 数据库
+* [数据库](shu-ju-ku.md)
   * [索引](suo-yin.md)
   * [事务](shi-wu.md)
   * [锁](suo.md)
