@@ -10,6 +10,7 @@
   * [内存管理](chapter1/nei-cun.md)
   * [线程安全、内存模型](chapter1/xian-cheng-an-quan.md)
   * [集合类](chapter1/ji-he-lei.md)
+  * [HashMap源码剖析](chapter1/hashmapyuan-ma-pou-xi.md)
   * [反射](chapter1/fan-she.md)
   * [泛型](chapter1/fan-xing.md)
   * [值传递和引用传递](chapter1/zhi-chuan-di-he-yin-yong-chuan-di.md)
@@ -17,7 +18,7 @@
   * [equals](chapter1/equals.md)
   * [String](chapter1/string.md)
   * [JAVA引用类型](chapter1/javayin-yong-lei-xing.md)
-  * [JDK](chapter1/jdk.md)
+  * HashMap源码剖析
 * [JAVA框架](javakuang-jia.md)
   * [Struts](javakuang-jia/struts.md)
   * [Spring](javakuang-jia/spring.md)
