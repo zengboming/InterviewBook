@@ -100,5 +100,40 @@ void resize(int newCapacity) {
     }
 ```
 
+get方法通过key值返回对应value，如果key为null，直接去table\[0\]处检索。
+
+```
+ public V get(Object key) {
+　　　　 //如果key为null,则直接去table[0]处去检索即可。
+        if (key == null)
+            return getForNullKey();
+        Entry<K,V> entry = getEntry(key);
+        return null == entry ? null : entry.getValue();
+ }
+ 
+ final Entry<K,V> getEntry(Object key) {
+            
+        if (size == 0) {
+            return null;
+        }
+        //通过key的hashcode值计算hash值
+        int hash = (key == null) ? 0 : hash(key);
+        //indexFor (hash&length-1) 获取最终数组索引，然后遍历链表，通过equals方法比对找出对应记录
+        for (Entry<K,V> e = table[indexFor(hash, table.length)];
+             e != null;
+             e = e.next) {
+            Object k;
+            if (e.hash == hash && 
+                ((k = e.key) == key || (key != null && key.equals(k))))
+                return e;
+        }
+        return null;
+    }    
+```
+
+可以看出，get方法的实现相对简单，key\(hashcode\)--&gt;hash--&gt;indexFor--&gt;最终索引位置，找到对应位置table\[i\]，再查看是否有链表，遍历链表，通过key的equals方法比对查找对应的记录。要注意的是，有人觉得上面在定位到数组位置之后然后遍历链表的时候，e.hash == hash这个判断没必要，仅通过equals判断就可以。其实不然，试想一下，如果传入的key对象重写了equals方法却没有重写hashCode，而恰巧此对象定位到这个数组位置，如果仅仅用equals判断可能是相等的，但其hashCode和当前对象不一致，这种情况，根据Object的hashCode的约定，不能返回当前对象，而应该返回null.
+
+“重写equals时也要同时覆盖hashcode.
+
 
 
