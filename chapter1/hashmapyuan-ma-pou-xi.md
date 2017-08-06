@@ -98,15 +98,24 @@ public HashMap(int initialCapacity, float loadFactor) {
             throw new IllegalArgumentException("Illegal load factor: " +
                                                loadFactor);
 
+         // 计算出大于 initialCapacity 的最小的 2 的 n 次方值。
+        int capacity = 1;//初始容量
+        while (capacity < initialCapacity)//确保容量为2的n次幂，使capacity为大于initialCapacity的最小的2的n次幂
+            capacity <<= 1;
+        
         this.loadFactor = loadFactor;
-        threshold = initialCapacity;
+        //设置HashMap的容量极限，当HashMap的容量达到该极限时就会进行扩容操作
+        threshold = (int) (capacity * loadFactor);
+        //初始化table数组
+        table = new Entry[capacity];
 　　　　　
         init();//init方法在HashMap中没有实际实现，不过在其子类如 linkedHashMap中就会有对应实现
 }
+
  public HashMap(int initialCapacity) {
          this(initialCapacity, DEFAULT_LOAD_FACTOR);
  }
-    
+
 public HashMap() {
          this.loadFactor = DEFAULT_LOAD_FACTOR;
          threshold = (int)(DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR);
@@ -117,36 +126,55 @@ public HashMap() {
 
 #### Put
 
-**在常规构造器中，没有为数组table分配内存空间（有一个入参为指定Map的构造器例外），而是在执行put操作的时候才真正构建table数组。**
+1.7 table在创建hashmap时分配空间，而1.8在put的时候分配，如果table为空，则为table分配空间
 
 ```
 public V put(K key, V value) {
-        //如果table数组为空数组{}，进行数组填充（为table分配实际内存空间），入参为threshold，此时threshold为initialCapacity 默认是1<<4(24=16)
-        if (table == EMPTY_TABLE) {
-            inflateTable(threshold);
-        }
        //如果key为null，存储位置为table[0]或table[0]的冲突链上
         if (key == null)
             return putForNullKey(value);
-        int hash = hash(key);//对key的hashcode进一步计算，确保散列均匀
-        int i = indexFor(hash, table.length);//获取在table中的实际位置
-        for (Entry<K,V> e = table[i]; e != null; e = e.next) {
-        //如果该对应数据已存在，执行覆盖操作。用新value替换旧value，并返回旧value
-            Object k;
-            if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
-                V oldValue = e.value;
-                e.value = value;
-                e.recordAccess(this);
-                return oldValue;
-            }
-        }
-        modCount++;//保证并发访问时，若HashMap内部结构发生变化，快速响应失败
-        addEntry(hash, key, value, i);//新增一个entry
-        return null;
+        // 若“key不为null”，则计算该key的哈希值，然后将其添加到该哈希值对应的链表中。
+         int hash = hash(key.hashCode());
+     //搜索指定hash值在对应table中的索引
+         int i = indexFor(hash, table.length);
+     // 循环遍历Entry数组,若“该key”对应的键值对已经存在，则用新的value取代旧的value。然后退出！
+         for (Entry<K,V> e = table[i]; e != null; e = e.next) { 
+             Object k;
+              if (e.hash == hash && ((k = e.key) == key || key.equals(k))) { //如果key相同则覆盖并返回旧值
+                  V oldValue = e.value;
+                 e.value = value;
+                 e.recordAccess(this);
+                 return oldValue;
+              }
+         }
+     //修改次数+1
+     modCount++;
+     //将key-value添加到table[i]处
+     addEntry(hash, key, value, i);
+     return null;
     }
 ```
 
-inflateTable这个方法用于为主干数组table在内存中分配存储空间，通过roundUpToPowerOf2\(toSize\)可以确保capacity为大于或等于toSize的最接近toSize的二次幂，比如toSize=13,则capacity=16;to\_size=16,capacity=16;to\_size=17,capacity=32.
+hash函数，它是通过key的hashCode值计算hash码，下面是计算hash码的函数：
+
+```
+//计算hash值的方法 通过键的hashCode来计算
+    static int hash(int h) {
+        // This function ensures that hashCodes that differ only by
+        // constant multiples at each bit position have a bounded
+        // number of collisions (approximately 8 at default load factor).
+        h ^= (h >>> 20) ^ (h >>> 12);
+        return h ^ (h >>> 7) ^ (h >>> 4);
+    }
+```
+
+得到hash码之后就会通过hash码去计算出应该存储在数组中的索引，计算索引的函数如下：
+
+```
+static int indexFor(int h, int length) { //根据hash值和数组长度算出索引值
+         return h & (length-1);  //这里不能随便算取，用hash&(length-1)是有原因的，这样可以确保算出来的索引是在数组大小范围内，不会超出
+     }
+```
 
 ![](/assets/hashmap.png)
 
@@ -208,4 +236,10 @@ get方法通过key值返回对应value，如果key为null，直接去table\[0\]�
 可以看出，get方法的实现相对简单，key\(hashcode\)--&gt;hash--&gt;indexFor--&gt;最终索引位置，找到对应位置table\[i\]，再查看是否有链表，遍历链表，通过key的equals方法比对查找对应的记录。要注意的是，有人觉得上面在定位到数组位置之后然后遍历链表的时候，e.hash == hash这个判断没必要，仅通过equals判断就可以。其实不然，试想一下，如果传入的key对象重写了equals方法却没有重写hashCode，而恰巧此对象定位到这个数组位置，如果仅仅用equals判断可能是相等的，但其hashCode和当前对象不一致，这种情况，根据Object的hashCode的约定，不能返回当前对象，而应该返回null.
 
 “重写equals时也要同时覆盖hashcode.
+
+### JDK 1.8
+
+链的长度大于8转换成红黑树
+
+
 
