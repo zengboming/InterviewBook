@@ -82,7 +82,40 @@ transient int modCount;//被修改的次数
 
 反之,加载因子越小,填满的元素越少,好处是:冲突的机会减小了,但:空间浪费多了.表中的数据将过于稀疏（很多空间还没用，就开始扩容了）
 
-冲突的机会越大,则查找的成本越高.因此,必须在 "冲突的机会"与"空间利用率"之间寻找一种平衡与折衷. 这种平衡与折衷本质上是数据结构中有名的"时-空"矛盾的平衡与折衷.如果机器内存足够，并且想要提高查询速度的话可以将加载因子设置小一点；相反如果机器内存紧张，并且对查询速度没有什么要求的话可以将加载因子设置大一点。不过一般我们都不用去设置它，让它取默认值0.75就好了。
+冲突的机会越大,则查找的成本越高.因此,必须在 "冲突的机会"与"空间利用率"之间寻找一种平衡与折衷. 这种平衡与折衷本质上是数据结构中有名的"时-空"矛盾的平衡与折衷.如果机器内存足够，并且想要提高查询速度的话可以将加载因子设置小一点；相反如果机器内存紧张，并且对查询速度没有什么要求的话可以将加载因子设置大一点。不过一般我们都不用去设置它，让它取默认值0.75就好了。
+
+#### 构造函数
+
+```
+public HashMap(int initialCapacity, float loadFactor) {
+　　　　　//此处对传入的初始容量进行校验，最大不能超过MAXIMUM_CAPACITY = 1<<30(230)
+        if (initialCapacity < 0)
+            throw new IllegalArgumentException("Illegal initial capacity: " +
+                                               initialCapacity);
+        if (initialCapacity > MAXIMUM_CAPACITY)
+            initialCapacity = MAXIMUM_CAPACITY;
+        if (loadFactor <= 0 || Float.isNaN(loadFactor))
+            throw new IllegalArgumentException("Illegal load factor: " +
+                                               loadFactor);
+
+        this.loadFactor = loadFactor;
+        threshold = initialCapacity;
+　　　　　
+        init();//init方法在HashMap中没有实际实现，不过在其子类如 linkedHashMap中就会有对应实现
+}
+ public HashMap(int initialCapacity) {
+         this(initialCapacity, DEFAULT_LOAD_FACTOR);
+ }
+    
+public HashMap() {
+         this.loadFactor = DEFAULT_LOAD_FACTOR;
+         threshold = (int)(DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR);
+         table = new Entry[DEFAULT_INITIAL_CAPACITY];
+        init();
+}
+```
+
+#### Put
 
 **在常规构造器中，没有为数组table分配内存空间（有一个入参为指定Map的构造器例外），而是在执行put操作的时候才真正构建table数组。**
 
@@ -119,6 +152,8 @@ inflateTable这个方法用于为主干数组table在内存中分配存储空间
 
 h&（length-1）保证获取的index一定在数组范围内，举个例子，默认容量16，length-1=15，h=18,转换成二进制计算为2,有些版本的对于此处的计算会使用 取模运算，也能保证index一定在数组范围内，不过位运算对计算机来说，性能更高一些（HashMap中有大量位运算）.
 
+#### Resize
+
 通过以上代码能够得知，当发生哈希冲突并且size大于阈值的时候，需要进行数组扩容，扩容时，需要新建一个长度为之前数组2倍的新的数组，然后将当前的Entry数组中的元素全部传输过去，扩容后的新数组长度为之前的2倍，所以扩容相对来说是个耗资源的操作。
 
 ```
@@ -136,6 +171,8 @@ void resize(int newCapacity) {
         threshold = (int)Math.min(newCapacity * loadFactor, MAXIMUM_CAPACITY + 1);
     }
 ```
+
+#### Get
 
 get方法通过key值返回对应value，如果key为null，直接去table\[0\]处检索。
 
