@@ -1,4 +1,4 @@
-http://www.cnblogs.com/ITtangtang/p/3948406.html
+[http://www.cnblogs.com/ITtangtang/p/3948406.html](http://www.cnblogs.com/ITtangtang/p/3948406.html)
 
 # HashMap
 
@@ -220,7 +220,7 @@ void resize(int newCapacity) {
 
 #### Get
 
-get方法通过key值返回对应value，如果key为null，直接去table\[0\]处检索。
+从HashMap中get元素时，首先计算key的hashCode，找到数组中对应位置的某一元素，然后通过key的equals方法在对应位置的链表中找到需要的元素。如果key为null，直接去table\[0\]处检索。
 
 ```
  public V get(Object key) {
