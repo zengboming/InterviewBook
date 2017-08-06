@@ -8,6 +8,12 @@ HashMap **数组+链表。**
 
 哈希冲突的解决方案采用了链地址法。
 
+如果想要线程安全的HashMap，可以通过Collections类的静态方法synchronizedMap获得线程安全的HashMap。
+
+```
+ Map map = Collections.synchronizedMap(new HashMap());
+```
+
 #### 实现原理
 
 HashMap的主干是一个Entry数组。Entry是HashMap的基本组成单元，每一个Entry包含一个key-value键值对。
@@ -31,6 +37,30 @@ static class Entry<K,V> implements Map.Entry<K,V> {
         key = k;
         hash = h;
     }
+    
+     // 判断两个Entry是否相等    
+    // 若两个Entry的“key”和“value”都相等，则返回true。    
+    // 否则，返回false    
+    public final boolean equals(Object o) {    
+        if (!(o instanceof Map.Entry))    
+            return false;    
+        Map.Entry e = (Map.Entry)o;    
+        Object k1 = getKey();    
+        Object k2 = e.getKey();    
+        if (k1 == k2 || (k1 != null && k1.equals(k2))) {    
+            Object v1 = getValue();    
+            Object v2 = e.getValue();    
+            if (v1 == v2 || (v1 != null && v1.equals(v2)))    
+                return true;    
+        }    
+        return false;    
+    }    
+   
+    // 实现hashCode()    
+    public final int hashCode() {    
+        return (key==null   ? 0 : key.hashCode()) ^    
+               (value==null ? 0 : value.hashCode());    
+    }    
 }
 ```
 
@@ -110,9 +140,9 @@ get方法通过key值返回对应value，如果key为null，直接去table\[0\]�
         Entry<K,V> entry = getEntry(key);
         return null == entry ? null : entry.getValue();
  }
- 
+
  final Entry<K,V> getEntry(Object key) {
-            
+
         if (size == 0) {
             return null;
         }
@@ -128,12 +158,10 @@ get方法通过key值返回对应value，如果key为null，直接去table\[0\]�
                 return e;
         }
         return null;
-    }    
+    }
 ```
 
 可以看出，get方法的实现相对简单，key\(hashcode\)--&gt;hash--&gt;indexFor--&gt;最终索引位置，找到对应位置table\[i\]，再查看是否有链表，遍历链表，通过key的equals方法比对查找对应的记录。要注意的是，有人觉得上面在定位到数组位置之后然后遍历链表的时候，e.hash == hash这个判断没必要，仅通过equals判断就可以。其实不然，试想一下，如果传入的key对象重写了equals方法却没有重写hashCode，而恰巧此对象定位到这个数组位置，如果仅仅用equals判断可能是相等的，但其hashCode和当前对象不一致，这种情况，根据Object的hashCode的约定，不能返回当前对象，而应该返回null.
 
 “重写equals时也要同时覆盖hashcode.
-
-
 
