@@ -102,7 +102,7 @@ public HashMap(int initialCapacity, float loadFactor) {
         int capacity = 1;//初始容量
         while (capacity < initialCapacity)//确保容量为2的n次幂，使capacity为大于initialCapacity的最小的2的n次幂
             capacity <<= 1;
-        
+
         this.loadFactor = loadFactor;
         //设置HashMap的容量极限，当HashMap的容量达到该极限时就会进行扩容操作
         threshold = (int) (capacity * loadFactor);
@@ -126,7 +126,9 @@ public HashMap() {
 
 #### Put
 
-1.7 table在创建hashmap时分配空间，而1.8在put的时候分配，如果table为空，则为table分配空间
+1.7 table在创建hashmap时分配空间，而1.8在put的时候分配，如果table为空，则为table分配空间。
+
+当程序试图将一个key-value对放入HashMap中时，程序首先根据该 key 的 hashCode\(\) 返回值决定该 Entry 的存储位置：如果两个 Entry 的 key 的 hashCode\(\) 返回值相同，那它们的存储位置相同。如果这两个 Entry 的 key 通过 equals 比较返回 true，新添加 Entry 的 value 将覆盖集合中原有 Entry 的 value，但key不会覆盖。如果这两个 Entry 的 key 通过 equals 比较返回 false，新添加的 Entry 将与集合中原有 Entry 形成 Entry 链，而且新添加的 Entry 位于 Entry 链的头部。
 
 ```
 public V put(K key, V value) {
@@ -173,12 +175,26 @@ hash函数，它是通过key的hashCode值计算hash码，下面是计算hash码
 ```
 static int indexFor(int h, int length) { //根据hash值和数组长度算出索引值
          return h & (length-1);  //这里不能随便算取，用hash&(length-1)是有原因的，这样可以确保算出来的索引是在数组大小范围内，不会超出
+```
+
+```
+void addEntry(int hash, K key, V value, int bucketIndex) {
+         Entry<K,V> e = table[bucketIndex]; //如果要加入的位置有值，将该位置原先的值设置为新entry的next,也就是新entry链表的下一个节点
+         table[bucketIndex] = new Entry<>(hash, key, value, e);
+         if (size++ >= threshold) //如果大于临界值就扩容
+             resize(2 * table.length); //以2的倍数扩容
      }
 ```
 
 ![](/assets/hashmap.png)
 
+我们一般对哈希表的散列很自然地会想到用hash值对length取模（即除法散列法），Hashtable中也是这样实现的，这种方法基本能保证元素在哈希表中散列的比较均匀，但取模会用到除法运算，效率很低，HashMap中则通过h&\(length-1\)的方法来代替取模，同样实现了均匀的散列，但效率要高很多，这也是HashMap对Hashtable的一个改进。
+
 h&（length-1）保证获取的index一定在数组范围内，举个例子，默认容量16，length-1=15，h=18,转换成二进制计算为2,有些版本的对于此处的计算会使用 取模运算，也能保证index一定在数组范围内，不过位运算对计算机来说，性能更高一些（HashMap中有大量位运算）.
+
+#### 为什么哈希表的容量一定要是2的整数次幂
+
+首先，length为2的整数次幂的话，h&\(length-1\)就相当于对length取模，这样便保证了散列的均匀，同时也提升了效率；其次，length为2的整数次幂的话，为偶数，这样length-1为奇数，奇数的最后一位是1，这样便保证了h&\(length-1\)的最后一位可能为0，也可能为1（这取决于h的值），即与后的结果可能为偶数，也可能为奇数，这样便可以保证散列的均匀性，而如果length为奇数的话，很明显length-1为偶数，它的最后一位是0，这样h&\(length-1\)的最后一位肯定为0，即只能为偶数，这样任何hash值都只会被散列到数组的偶数下标位置上，这便浪费了近一半的空间，因此，length取2的整数次幂，是为了使不同hash值发生碰撞的概率较小，这样就能使元素在哈希表中均匀地散列。
 
 #### Resize
 
@@ -240,6 +256,4 @@ get方法通过key值返回对应value，如果key为null，直接去table\[0\]�
 ### JDK 1.8
 
 链的长度大于8转换成红黑树
-
-
 
