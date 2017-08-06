@@ -1,4 +1,4 @@
-[http://www.cnblogs.com/chengxiao/p/6059914.html](http://www.cnblogs.com/chengxiao/p/6059914.html)
+http://www.cnblogs.com/ITtangtang/p/3948406.html
 
 # HashMap
 
@@ -200,6 +200,8 @@ h&（length-1）保证获取的index一定在数组范围内，举个例子，�
 
 通过以上代码能够得知，当发生哈希冲突并且size大于阈值的时候，需要进行数组扩容，扩容时，需要新建一个长度为之前数组2倍的新的数组，然后将当前的Entry数组中的元素全部传输过去，扩容后的新数组长度为之前的2倍，所以扩容相对来说是个耗资源的操作。
 
+当HashMap中的元素个数超过数组大小\*loadFactor时，就会进行数组扩容，loadFactor的默认值为0.75，这是一个折中的取值。也就是说，默认情况下，数组大小为16，那么当HashMap中元素个数超过16\*0.75=12的时候，就把数组的大小扩展为 2\*16=32，即扩大一倍，然后重新计算每个元素在数组中的位置，扩容是需要进行数组复制的，复制数组是非常消耗性能的操作，所以如果我们已经预知HashMap中元素的个数，那么预设元素的个数能够有效的提高HashMap的性能。
+
 ```
 void resize(int newCapacity) {
         Entry[] oldTable = table;
@@ -210,9 +212,9 @@ void resize(int newCapacity) {
         }
 
         Entry[] newTable = new Entry[newCapacity];
-        transfer(newTable, initHashSeedAsNeeded(newCapacity));
-        table = newTable;
-        threshold = (int)Math.min(newCapacity * loadFactor, MAXIMUM_CAPACITY + 1);
+        transfer(newTable, initHashSeedAsNeeded(newCapacity));//用来将原先table的元素全部移到newTable里面
+        table = newTable;//再将newTable赋值给table
+        threshold = (int)Math.min(newCapacity * loadFactor, MAXIMUM_CAPACITY + 1);//重新计算临界值
     }
 ```
 
@@ -225,28 +227,16 @@ get方法通过key值返回对应value，如果key为null，直接去table\[0\]�
 　　　　 //如果key为null,则直接去table[0]处去检索即可。
         if (key == null)
             return getForNullKey();
-        Entry<K,V> entry = getEntry(key);
-        return null == entry ? null : entry.getValue();
- }
-
- final Entry<K,V> getEntry(Object key) {
-
-        if (size == 0) {
-            return null;
-        }
-        //通过key的hashcode值计算hash值
-        int hash = (key == null) ? 0 : hash(key);
-        //indexFor (hash&length-1) 获取最终数组索引，然后遍历链表，通过equals方法比对找出对应记录
-        for (Entry<K,V> e = table[indexFor(hash, table.length)];
-             e != null;
-             e = e.next) {
-            Object k;
-            if (e.hash == hash && 
-                ((k = e.key) == key || (key != null && key.equals(k))))
-                return e;
-        }
-        return null;
-    }
+        int hash = hash(key.hashCode());   
+    for (Entry<K,V> e = table[indexFor(hash, table.length)];  //获取最终数组索引，然后遍历链表，通过equals方法比对找出对应记录
+        e != null;   
+        e = e.next) {   
+        Object k;   
+        if (e.hash == hash && ((k = e.key) == key || key.equals(k)))   
+            return e.value;   
+    }   
+    return null;   
+}
 ```
 
 可以看出，get方法的实现相对简单，key\(hashcode\)--&gt;hash--&gt;indexFor--&gt;最终索引位置，找到对应位置table\[i\]，再查看是否有链表，遍历链表，通过key的equals方法比对查找对应的记录。要注意的是，有人觉得上面在定位到数组位置之后然后遍历链表的时候，e.hash == hash这个判断没必要，仅通过equals判断就可以。其实不然，试想一下，如果传入的key对象重写了equals方法却没有重写hashCode，而恰巧此对象定位到这个数组位置，如果仅仅用equals判断可能是相等的，但其hashCode和当前对象不一致，这种情况，根据Object的hashCode的约定，不能返回当前对象，而应该返回null.
