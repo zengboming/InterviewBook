@@ -37,7 +37,7 @@ static class Entry<K,V> implements Map.Entry<K,V> {
         key = k;
         hash = h;
     }
-    
+
      // 判断两个Entry是否相等    
     // 若两个Entry的“key”和“value”都相等，则返回true。    
     // 否则，返回false    
@@ -55,7 +55,7 @@ static class Entry<K,V> implements Map.Entry<K,V> {
         }    
         return false;    
     }    
-   
+
     // 实现hashCode()    
     public final int hashCode() {    
         return (key==null   ? 0 : key.hashCode()) ^    
@@ -67,6 +67,7 @@ static class Entry<K,V> implements Map.Entry<K,V> {
 **简单来说，HashMap由数组+链表组成的，数组是HashMap的主体，链表则是主要为了解决哈希冲突而存在的，如果定位到的数组位置不含链表（当前entry的next指向null）,那么对于查找，添加等操作很快，仅需一次寻址即可；如果定位到的数组包含链表，对于添加操作，其时间复杂度依然为O\(1\)，因为最新的Entry会插入链表头部，急需要简单改变引用链即可，而对于查找操作来讲，此时就需要遍历链表，然后通过key对象的equals方法逐一比对查找。所以，性能考虑，HashMap中的链表出现越少，性能才会越好。**
 
 ```
+transient Entry[] table;//存储元素的实体数组
 //实际存储的key-value键值对的个数
 transient int size;
 //阈值，当table == {}时，该值为初始容量（初始容量默认为16）；当table被填充了，也就是为table分配内存空间后，threshold一般为 capacity*loadFactory。HashMap在进行扩容时需要参考threshold，后面会详细谈到
@@ -74,8 +75,14 @@ int threshold;
 //负载因子，代表了table的填充度有多少，默认是0.75
 final float loadFactor;
 //用于快速失败，由于HashMap非线程安全，在对HashMap进行迭代时，如果期间其他线程的参与导致HashMap的结构发生变化了（比如put，remove等操作），需要抛出异常ConcurrentModificationException
-transient int modCount;
+transient int modCount;//被修改的次数
 ```
+
+若:加载因子越大,填满的元素越多,好处是,空间利用率高了,但:冲突的机会加大了.链表长度会越来越长,查找效率降低。
+
+反之,加载因子越小,填满的元素越少,好处是:冲突的机会减小了,但:空间浪费多了.表中的数据将过于稀疏（很多空间还没用，就开始扩容了）
+
+冲突的机会越大,则查找的成本越高.因此,必须在 "冲突的机会"与"空间利用率"之间寻找一种平衡与折衷. 这种平衡与折衷本质上是数据结构中有名的"时-空"矛盾的平衡与折衷.如果机器内存足够，并且想要提高查询速度的话可以将加载因子设置小一点；相反如果机器内存紧张，并且对查询速度没有什么要求的话可以将加载因子设置大一点。不过一般我们都不用去设置它，让它取默认值0.75就好了。
 
 **在常规构造器中，没有为数组table分配内存空间（有一个入参为指定Map的构造器例外），而是在执行put操作的时候才真正构建table数组。**
 
