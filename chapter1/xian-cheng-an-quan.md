@@ -169,13 +169,15 @@ Java 内存模型规定和指引Java 程序在不同的内存架构、CPU 和操
 
 1. Lock是一个接口，而synchronized是Java中的关键字，synchronized是内置的语言实现；
 
-2. synchronized在发生异常时，会自动释放线程占有的锁，因此不会导致死锁现象发生；而Lock在发生异常时，如果没有主动通过unLock\(\)去释放锁，则很可能造成死锁现象，因此使用Lock时需要在finally块中释放锁；
+2. Synchronized采用的是CPU悲观锁机制，即线程获得的独占锁。Lock用的是乐观锁方式，每次不加锁而是假设没有冲突，而去完成某项操作，如果因为冲突失败就重试，直到成功为止。
 
-3. Lock可以让等待锁的线程响应中断，而synchronized却不行，使用synchronized时，等待的线程会一直等待下去，不能够响应中断；lock是可中断的锁，而synchronized是不可中断锁。lock只能中断等待锁的线程，不能中断正在执行的线程。
+3. synchronized在发生异常时，会自动释放线程占有的锁，因此不会导致死锁现象发生；而Lock在发生异常时，如果没有主动通过unLock\(\)去释放锁，则很可能造成死锁现象，因此使用Lock时需要在finally块中释放锁；
 
-4. 通过Lock可以知道有没有成功获取锁，而synchronized却无法办到。
+4. Lock可以让等待锁的线程响应中断，而synchronized却不行，使用synchronized时，等待的线程会一直等待下去，不能够响应中断；lock是可中断的锁，而synchronized是不可中断锁。lock只能中断等待锁的线程，不能中断正在执行的线程。
 
-5. Lock可以提高多个线程进行读操作的效率。
+5. 通过Lock可以知道有没有成功获取锁，而synchronized却无法办到。
+
+6. Lock可以提高多个线程进行读操作的效率。
 
 #### ThreadLocal \(线程变量副本\)
 
@@ -186,6 +188,4 @@ ThreadLocal类中维护一个Map，用于存储每一个线程的变量副本，
 ThreadLocal不是为了解决多线程访问共享变量，而是为每个线程创建一个单独的变量副本，提供了保持对象的方法和避免参数传递的复杂性。
 
 应用场景：同一网站，为每个用户开一个线程，每个线程创建一个ThreadLocal，里面存用户基本信息。
-
-
 
