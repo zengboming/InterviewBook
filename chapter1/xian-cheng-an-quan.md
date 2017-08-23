@@ -177,7 +177,13 @@ Java 内存模型规定和指引Java 程序在不同的内存架构、CPU 和操
 
 5. 通过Lock可以知道有没有成功获取锁，而synchronized却无法办到。
 
-6. Lock可以提高多个线程进行读操作的效率。
+6. 在资源竞争不是很激烈的情况下，Synchronized的性能要优于ReetrantLock，但是在资源竞争很激烈的情况下，Synchronized的性能会下降几十倍，但是ReetrantLock的性能能维持常态；
+
+#### Volatile和Synchronized区别
+
+1. 粒度不同，Volatile针对变量，Synchronized针对对象和类。
+2. Synchronized阻塞，Volatile不阻塞。
+3. Synchronized保证：原子性、可见性、有序性。Volatile保证：可见性、有序性，不保证原子性。
 
 #### ThreadLocal \(线程变量副本\)
 
