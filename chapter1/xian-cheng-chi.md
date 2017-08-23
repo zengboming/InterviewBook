@@ -87,7 +87,51 @@ public void execute(Runnable command) {
 
 2. **CPU限制的任务，提高CPU利用率**：在运行于具有 N 个处理器机器上的计算限制的应用程序中，在线程数目接近 N 时添加额外的线程可能会改善总处理能力，而在线程数目超过 N 时添加额外的线程将不起作用。事实上，太多的线程甚至会降低性能，因为它会导致额外的环境切换开销。
 
-3. **I/O限制的任务（例如，从套接字读取 HTTP 请求的任务）：**需要让池的大小超过可用处理器的数目，因为并不是所有线程都一直在工作。通过使用概要分析，您可以或得一些数据，并计算出大概的线程池大小。Amdahl 法则提供很好的近似公式。用 WT 表示每项任务的平均等待时间，ST 表示每项任务的平均服务时间（计算时间）。则 WT/ST 是每项任务等待所用时间的百分比。对于 N 处理器系统，池中可以近似有**N\*\(1+WT/ST\)**个线程。 
+3. **I/O限制的任务（例如，从套接字读取 HTTP 请求的任务）：**需要让池的大小超过可用处理器的数目，因为并不是所有线程都一直在工作。通过使用概要分析，您可以或得一些数据，并计算出大概的线程池大小。Amdahl 法则提供很好的近似公式。用 WT 表示每项任务的平均等待时间，ST 表示每项任务的平均服务时间（计算时间）。则 WT/ST 是每项任务等待所用时间的百分比。对于 N 处理器系统，池中可以近似有**N\*\(1+WT/ST\)**个线程。
+
+#### 常用线程池
+
+1. **Executors.newSingleThreadExecutor\(\)**
+   ExecutorService executorService1 = Executors.newSingleThreadExecutor\(\);
+   单例线程，任意时间池中只能有一个线程。如果当前线程在执行任务时突然中断，则会创建一个新的线程替代它继续执行任务
+2. **Executors.newFixedThreadPool\(\)**
+   ExecutorService executorService2 = Executors.newFixedThreadPool\(10\);
+   创建一个可重用固定线程集合的线程池，以共享的无界队列方式来运行这些线程。
+
+3. **Executors.newScheduledThreadPool\(\)**
+   ExecutorService executorService3 = Executors.newScheduledThreadPool\(10\);
+   调度型线程池。这个池子里的线程可以按schedule依次delay执行，或周期执行。
+4. **Executors.newCachedThreadPool\(\)**
+   ExecutorService executorService = Executors.newCachedThreadPool\(\);
+   创建一个可根据需要创建新线程的线程池，但是在以前构造的线程可用时将重用它们。缓存型池子通常用于执行一些生存期很短的异步型任务。超过TIMEOUT不活动，其会自动被终止。
+
+```
+  import java.util.concurrent.ExecutorService;  
+  import java.util.concurrent.Executors;  
+  public class ThreadPoolTest {  
+      public static void main(String[] args) {  
+          ExecutorService threadPool = Executors.newFixedThreadPool(3);  
+          //ExecutorService threadPool = Executors.newSingleThreadExecutor();
+          //ExecutorService threadPool = Executors.newCachedThreadPool();
+          for(int i = 1; i 5; i++) {  
+              final int taskID = i;  
+              threadPool.execute(new Runnable() {  
+                  public void run() {  
+                      for(int i = 1; i 5; i++) {  
+                          try {  
+                              Thread.sleep(20);// 为了测试出效果，让每次任务执行都需要一定时间  
+                          } catch (InterruptedException e) {  
+                              e.printStackTrace();  
+                          }  
+                          System.out.println("第" + taskID + "次任务的第" + i + "次执行");  
+                      }  
+                  }  
+              });  
+          }  
+          threadPool.shutdown();// 任务执行完毕，关闭线程池  
+      }  
+  }  
+```
 
 #### 
 
