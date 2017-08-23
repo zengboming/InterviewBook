@@ -8,7 +8,7 @@
   * [内存泄漏](chapter1/nei-cun-xie-lou.md)
   * [GC](chapter1/gcyuan-li.md)
   * [内存管理](chapter1/nei-cun.md)
-  * [线程安全、内存模型](chapter1/xian-cheng-an-quan.md)
+  * [线程安全](chapter1/xian-cheng-an-quan.md)
   * [集合类](chapter1/ji-he-lei.md)
   * [HashMap源码剖析](chapter1/hashmapyuan-ma-pou-xi.md)
   * [反射](chapter1/fan-she.md)
@@ -19,7 +19,7 @@
   * [String](chapter1/string.md)
   * [JAVA引用类型](chapter1/javayin-yong-lei-xing.md)
   * HashMap源码剖析
-  * [ThreadLocal](chapter1/threadlocal.md)
+  * 乐观锁悲观锁
 * [JAVA框架](javakuang-jia.md)
   * [Struts](javakuang-jia/struts.md)
   * [Spring](javakuang-jia/spring.md)
