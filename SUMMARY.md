@@ -19,6 +19,7 @@
   * [String](chapter1/string.md)
   * [JAVA引用类型](chapter1/javayin-yong-lei-xing.md)
   * HashMap源码剖析
+  * [ThreadLocal](chapter1/threadlocal.md)
 * [JAVA框架](javakuang-jia.md)
   * [Struts](javakuang-jia/struts.md)
   * [Spring](javakuang-jia/spring.md)
