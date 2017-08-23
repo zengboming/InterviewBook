@@ -102,8 +102,8 @@ public void execute(Runnable command) {
    ExecutorService executorService3 = Executors.newScheduledThreadPool\(10\);  
    调度型线程池。这个池子里的线程可以按schedule依次delay执行，或周期执行。
 
-4. **Executors.newCachedThreadPool\(\)**
-   ExecutorService executorService = Executors.newCachedThreadPool\(\);
+4. **Executors.newCachedThreadPool\(\)**  
+   ExecutorService executorService = Executors.newCachedThreadPool\(\);  
    创建一个可根据需要创建新线程的线程池，但是在以前构造的线程可用时将重用它们。缓存型池子通常用于执行一些生存期很短的异步型任务。超过TIMEOUT不活动，其会自动被终止。
 
 ```
@@ -114,7 +114,7 @@ public void execute(Runnable command) {
           ExecutorService threadPool = Executors.newFixedThreadPool(3);  
           //ExecutorService threadPool = Executors.newSingleThreadExecutor();
           //ExecutorService threadPool = Executors.newCachedThreadPool();
-          for(int i = 1; i 5; i++) {  
+          for(int i = 1; i < 5; i++) {  
               final int taskID = i;  
               threadPool.execute(new Runnable() {  
                   public void run() {  
