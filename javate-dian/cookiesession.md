@@ -22,5 +22,80 @@ http是无状态的会话，需要基于http协议支持会话状态的机制。
 2. 当浏览器得到这个sessionId会将它放在自己的进程内存里,.然后你继续发请求给这个网站的时候,浏览器就会把这个sessionId放在请求头里发送给该服务器了,这样服务器得到sessionId后再和自己内存里存放的sessionid对比锁定客户端,从而区分不同客户端,完成会话。
 3. 关闭浏览器结束进程,则这个sessionid将消失,如果用户又打开浏览器想继续这次会话的时候,就会因为发送的请求中没有这个sessionid，而使服务器无法辨别请求身份。
 
+  
+@font-face{  
+font-family:"Times New Roman";  
+}  
+  
+@font-face{  
+font-family:"宋体";  
+}  
+  
+@font-face{  
+font-family:"等线";  
+}  
+  
+@font-face{  
+font-family:"微软雅黑";  
+}  
+  
+p.MsoNormal{  
+mso-style-name:正文;  
+mso-style-parent:"";  
+margin:0pt;  
+margin-bottom:.0001pt;  
+font-family:'Times New Roman';  
+mso-fareast-font-family:微软雅黑;  
+font-size:10.5000pt;  
+}  
+  
+h3{  
+mso-style-name:"标题 3";  
+mso-style-noshow:yes;  
+mso-style-next:正文;  
+margin-top:13.0000pt;  
+margin-bottom:13.0000pt;  
+page-break-after:avoid;  
+mso-pagination:lines-together;  
+mso-outline-level:3;  
+font-family:'Times New Roman';  
+mso-fareast-font-family:微软雅黑;  
+font-weight:bold;  
+font-size:15.0000pt;  
+}  
+  
+p.MsoFooter{  
+mso-style-name:页脚;  
+mso-style-noshow:yes;  
+margin:0pt;  
+margin-bottom:.0001pt;  
+font-family:'Times New Roman';  
+mso-fareast-font-family:微软雅黑;  
+font-size:10.5000pt;  
+}  
+  
+span.msoIns{  
+mso-style-type:export-only;  
+mso-style-name:"";  
+text-decoration:underline;  
+text-underline:single;  
+color:blue;  
+}  
+  
+span.msoDel{  
+mso-style-type:export-only;  
+mso-style-name:"";  
+text-decoration:line-through;  
+color:red;  
+}  
+@page{mso-page-border-surround-header:no;  
+	mso-page-border-surround-footer:no;}@page Section0{  
+}  
+div.Section0{page:Section0;}
 
+### **session是存储在什么地方，以什么形式存储的？**
+
+1）session变量保存在web服务器中，你不能直接修改，当然，调用程序中的setAttribute\(\)方法当然可以了。cookie存储的不是具体的数据，要不岂不是太不安全了，谁都可以修改session变量了，网站也毫无安全性可言。实际，在cookie中，存储的是一个sessionId，它标示了一个服务器中的session变量，通过这种方式，服务器就知道你到底是那个session了。所以，记住客户端只存储session标识，实际内容在网页服务器中。
+
+2）以键值对的方式存储的
 
