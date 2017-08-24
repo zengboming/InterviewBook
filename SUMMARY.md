@@ -13,6 +13,7 @@
     * [线程池](chapter1/1234.md)
     * [Callable](chapter1/callable.md)
     * [Timer](chapter1/timer.md)
+    * [线程状态](chapter1/xian-cheng-zhuang-tai.md)
   * [集合类](chapter1/ji-he-lei.md)
     * [HashMap源码](chapter1/ji-he-lei/hashmap.md)
     * ArrayList源码
