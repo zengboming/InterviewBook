@@ -9,6 +9,7 @@
   * [GC](chapter1/gcyuan-li.md)
   * [内存管理](chapter1/nei-cun.md)
   * 线程
+    * [线程安全](chapter1/123.md)
   * [线程安全](chapter1/xian-cheng-an-quan.md)
   * [线程池](chapter1/xian-cheng-chi.md)
   * [Callable、Future](chapter1/callablefuture.md)
