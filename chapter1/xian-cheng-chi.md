@@ -81,6 +81,24 @@ public void execute(Runnable command) {
 
 8. getPoolSize:线程池的线程数量。如果线程池不销毁的话，池里的线程不会自动销毁，所以这个大小只增不+ getActiveCount：获取活动的线程数。
 
+```
+public class ThreadPoolExecutor extends AbstractExecutorService {
+    .....
+    public ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,
+            BlockingQueue<Runnable> workQueue);
+ 
+    public ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,
+            BlockingQueue<Runnable> workQueue,ThreadFactory threadFactory);
+ 
+    public ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,
+            BlockingQueue<Runnable> workQueue,RejectedExecutionHandler handler);
+ 
+    public ThreadPoolExecutor(int corePoolSize,int maximumPoolSize,long keepAliveTime,TimeUnit unit,
+        BlockingQueue<Runnable> workQueue,ThreadFactory threadFactory,RejectedExecutionHandler handler);
+    ...
+}
+```
+
 #### 线程池调优
 
 1. **调整线程池的大小** - 线程池的最佳大小取决于可用处理器的数目以及工作队列中的任务的性质。
@@ -154,7 +172,7 @@ public void execute(Runnable command) {
               }  
           }, 5, 2, TimeUnit.SECONDS);  
       }  
-  }  
+  }
 ```
 
 
