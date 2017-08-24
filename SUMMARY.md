@@ -36,6 +36,7 @@
   * [网络攻击](javate-dian/wang-luo-gong-ji.md)
   * [Socket](javate-dian/socket.md)
   * [IP地址分类](javate-dian/ipdi-zhi-fen-lei.md)
+  * [打开网站流程](javate-dian/da-kai-wang-zhan-liu-cheng.md)
 * [操作系统](cao-zuo-xi-tong.md)
   * [线程和进程](cao-zuo-xi-tong/xian-cheng-he-jin-cheng.md)
   * [中断](cao-zuo-xi-tong/si-suo.md)
