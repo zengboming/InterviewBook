@@ -65,5 +65,6 @@
   * [范式](fan-shi.md)
   * 存储引擎
 * [MongoDB](mongodb.md)
+* [Linux](linux.md)
 * [面试内容](mian-shi-nei-rong.md)
 
