@@ -74,16 +74,22 @@ HTTP协议中定义了断点续传相关的HTTP头 Range和Content-Range字段�
 HTTP请求包括三部分：
 
 1. **请求行**\(Request Line\)：由请求方法\(method\)，请求URL和协议\(Protocol\)版本构成。如：GET /index.html HTTP/1.1
-2. 请求**头部**（Header）：请求头部通知服务器有关于客户端请求的信息，包括：  
-   1. User-Agent：产生请求的浏览器类型的详细信息。  
-   2. Accept：指定客户端能够接收的内容类型。  
-   3. Host：请求的web服务器域名地址。  
-   4. connection：是否需要持久连接，值为“Keep - Alive” 或 HTTP 1.1默认为长连接。  
-   5. Content-Type:表示具体请求中的媒体类型信息。在HTTP中，MIME类型被定义在Content-Type     header中。每个MIME类型由两部分组成，前面是数据的大类别，例如声音audio、图象image等，后面定义具体的种类。
+2. 请求**头部**（Header）：请求头部通知服务器有关于客户端请求的信息，包括：
 
-   6. cookie
+   1. User-Agent：产生请求的浏览器类型的详细信息。
+
+   2. Accept：指定客户端能够接收的内容类型。
+
+   3. Host：请求的web服务器域名地址。
+
+   4. connection：是否需要持久连接，值为“Keep - Alive” 或 HTTP 1.1默认为长连接。
+
+   5. Content-Type:表示具体请求中的媒体类型信息。在HTTP中，MIME类型被定义在Content-Type     header中。每个MIME类型由两部分组成，前面是数据的大类别，例如声音audio、图象image等，后面定义具体的种类
+
+   6. Cookie
 
 3. 空行
+
 4. **实体内容**（Body\)：可以被认为是附加在请求之后的文本或二进制文件，只有请求方式为post的时候，实体内容才会有数据。
 
 #### content-type
