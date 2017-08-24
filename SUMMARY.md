@@ -14,6 +14,7 @@
     * [Callable](chapter1/callable.md)
     * [Timer](chapter1/timer.md)
     * [线程状态](chapter1/xian-cheng-zhuang-tai.md)
+    * [同步/异步/阻塞](chapter1/tong-6b65-yi-6b65-zu-sai.md)
   * [集合类](chapter1/ji-he-lei.md)
     * [HashMap源码](chapter1/ji-he-lei/hashmap.md)
     * ArrayList源码
@@ -46,7 +47,6 @@
   * [Windows内存管理方式](cao-zuo-xi-tong/windowsnei-cun-guan-li-fang-shi.md)
   * [磁盘和文件](cao-zuo-xi-tong/ci-pan-he-wen-jian.md)
   * [死锁](cao-zuo-xi-tong/zhong-duan.md)
-  * [IO](cao-zuo-xi-tong/io.md)
 * 算法
   * [一致性哈希算法](suan-fa-yu-shu-ju-jie-gou/yi-zhi-xing-ha-xi.md)
   * [链表有环](suan-fa-yu-shu-ju-jie-gou/lian-biao-you-huan.md)
