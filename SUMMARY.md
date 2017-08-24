@@ -8,10 +8,9 @@
   * [内存泄漏](chapter1/nei-cun-xie-lou.md)
   * [GC](chapter1/gcyuan-li.md)
   * [内存管理](chapter1/nei-cun.md)
-  * 线程
+  * [线程](chapter1/xian-cheng.md)
     * [线程安全](chapter1/123.md)
-  * [线程安全](chapter1/xian-cheng-an-quan.md)
-  * [线程池](chapter1/xian-cheng-chi.md)
+    * [线程池](chapter1/1234.md)
   * [Callable、Future](chapter1/callablefuture.md)
   * [集合类](chapter1/ji-he-lei.md)
   * [HashMap源码剖析](chapter1/hashmapyuan-ma-pou-xi.md)
