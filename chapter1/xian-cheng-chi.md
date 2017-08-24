@@ -86,7 +86,7 @@ public void execute(Runnable command) {
 
 8. handler：表示当拒绝处理任务时的策略，有以下四种取值：  
    1. ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。  
-   2. ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。   
+   2. ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。  
    3. ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）  
    4. ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务
 
@@ -114,9 +114,9 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 
 2. **submit\(\)：**来向线程池提交任务的，但是它和execute\(\)方法不同，它能够返回任务执行的结果，内部调用的execute\(\)方法，只不过它利用了Future来获取任务执行结果。
 
-3. **shutdown\(\)：**用来关闭线程池的
+3. **shutdown\(\)：**不会立即终止线程池，而是要等所有任务缓存队列中的任务都执行完后才终止，但再也不会接受新的任务
 
-4. **shutdownNow\(\)：**用来关闭线程池的
+4. **shutdownNow\(\)：**立即终止线程池，并尝试打断正在执行的任务，并且清空任务缓存队列，返回尚未执行的任务
 
 #### 线程池调优
 
