@@ -78,18 +78,17 @@ public void execute(Runnable command) {
 5. unit：参数keepAliveTime的时间单位，有7种取值，在TimeUnit类中有7种静态属性。
 
 6. workQueue：一个阻塞队列，用来存储等待执行的任务，这个参数的选择也很重要，会对线程池的运行过程产生重大影响，一般来说，这里的阻塞队列有以下几种选择：  
-   1. ArrayBlockingQueue  
-   2. PriorityBlockingQueue  
-   3. LinkedBlockingQueue  
-   4. SynchronousQueue;
+   1. ArrayBlockingQueue：基于数组的先进先出队列，此队列创建时必须指定大小；  
+   3. LinkedBlockingQueue：基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX\_VALUE；  
+   4. SynchronousQueue：这个队列比较特殊，它不会保存提交的任务，而是将直接新建一个线程来执行新来的任务。
 
 7. threadFactory：线程工厂，主要用来创建线程；
 
-8. handler：表示当拒绝处理任务时的策略，有以下四种取值：
-   1. ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。
-   2. ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。 
-   3. ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）
-   4. ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务 
+8. handler：表示当拒绝处理任务时的策略，有以下四种取值：  
+   1. ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。  
+   2. ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。   
+   3. ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）  
+   4. ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务
 
 ```
 public class ThreadPoolExecutor extends AbstractExecutorService {
