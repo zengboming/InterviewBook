@@ -1,6 +1,20 @@
-# Cookie
+### Cookie
 
-# Session
+Cookie实际上是一小段的文本信息。客户端请求服务器，如果服务器需要记录该用户状态，就产生一个用户身份标识，然后在响应消息中将该标识号以Cookie的形式传递给浏览器.客户端浏览器会把Cookie保存起来。浏览器在以后每次访问该web服务器时，浏览器把请求的网址连同该Cookie一同提交给服务器。服务器检查该Cookie，以此来辨认用户状态。服务器还可以根据需要修改Cookie的内容. Cookie不能被浏览器共享 Cookie具有不可跨域名性，例如浏览器访问Google只会携带Google的Cookie，而不会携带Baidu的Cookie。Cookie的maxAge决定着Cookie的有效期，单位为秒（Second）。默认情况下,cookie是一个会话级别的,用户退出浏览器后被删除
+
+### Session
+
+Session是另一种记录客户状态的机制，不同的是Cookie保存在客户端浏览器中，而Session保存在服务器上。客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。这就是Session。 如果说Cookie机制是通过检查客户身上的“通行证”来确定客户身份的话，那么Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了。 Session保存在服务器端。为了获得更高的存取速度，服务器一般把Session放在内存里。每个用户都会有一个独立的Session。如果Session内容过于复杂，当大量客户访问服务器时可能会导致内存溢出。因此，Session里的信息应该尽量精简。
+
+#### session工作原理 
+
+1. web不会在客户端开始访问它时创建session,在访问特殊的程序并且该程序\(servlet\)决定与客户端开启会话时,服务器生成一个唯一值,称为Session ID（好像是通过取进程ID的方式取得的）。服务器开辟一块内存，对应于该Session ID。
+2. 服务器再将该Session ID写入浏览器的cookie。
+3. 服务器内有一进程，监视所有Session的活动状况，如果有Session超时或是主动关闭，服务器就释放改内存块。
+4. 当浏览器连入服务器时并请求Session时，服务器就读浏览器Cookie中的Session ID。
+5. 然后，服务检查该Session ID所对应的内存是否有效。 
+6. 如果有效，就读出内存中的值。 
+7. 如果无效，就建立新的Session。
 
 #### Cookie和Session区别
 
