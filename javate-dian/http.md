@@ -84,7 +84,7 @@ HTTP请求包括三部分：
 
    4. connection：是否需要持久连接，值为“Keep - Alive” 或 HTTP 1.1默认为长连接。
 
-   5. Content-Type:表示具体请求中的媒体类型信息。在HTTP中，MIME类型被定义在Content-Type     header中。每个MIME类型由两部分组成，前面是数据的大类别，例如声音audio、图象image等，后面定义具体的种类
+   5. Content-Type:表示具体请求中的媒体类型信息。在HTTP中，MIME类型被定义在Content-Type中。每个MIME类型由两部分组成，前面是数据的大类别，例如声音audio、图象image等，后面定义具体的种类。
 
    6. Cookie
 
@@ -99,6 +99,13 @@ MediaType，即是Internet MediaType，互联网媒体类型；也叫做MIME类�
 
 在HTTP中，MIME类型被定义在Content-Type     header中。每个MIME类型由两部分组成，前面是数据的大类别，  
 例如声音audio、图象image等，后面定义具体的种类。
+
+#### Accept和content-type区别
+
+1. Accept属于请求头， Content-Type属于实体头。Http报头分为通用报头，请求报头和实体报头。请求方的http报头结构：通用报头\|请求报头\|实体报头。
+2. Accept代表发送端（客户端）希望接受的数据类型。Content-Type代表发送端（客户端\|服务器）发送的实体数据的数据类型。
+
+
 
 #### HTTP请求方式
 
@@ -132,7 +139,9 @@ MediaType，即是Internet MediaType，互联网媒体类型；也叫做MIME类�
 
 #### HTTP响应报文
 
-状态行、响应头、响应正文。状态行包含：协议版本、数字形式的状态代码、及相应的状态描述。
+状态行、响应头、响应正文。
+
+状态行包含：协议版本、状态代码、及相应的文本描述。比如：HTTP/1.1 200 OK。
 
 &lt;status-line&gt;             状态行
 
