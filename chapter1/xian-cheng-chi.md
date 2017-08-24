@@ -74,10 +74,12 @@ public void execute(Runnable command) {
 4. **queueCapacity**\(任务队列容量\):从maxPoolSize的描述上可以看出,任务队列的容量会影响到线程的变化,因此任务队列的长度也需要恰当的设置。
 
 5. unit：参数keepAliveTime的时间单位，有7种取值，在TimeUnit类中有7种静态属性。
+
 6. workQueue：一个阻塞队列，用来存储等待执行的任务，这个参数的选择也很重要，会对线程池的运行过程产生重大影响，一般来说，这里的阻塞队列有以下几种选择：
    1. ArrayBlockingQueue
-   2. PriorityBlockingQueue使用较少
-   3. 一般使用LinkedBlockingQueue和Synchronous。
+   2. PriorityBlockingQueue
+   3. LinkedBlockingQueue
+   4. SynchronousQueue;
 7. threadFactory：线程工厂，主要用来创建线程；
 8. handler：表示当拒绝处理任务时的策略，有以下四种取值：
    1. ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。
