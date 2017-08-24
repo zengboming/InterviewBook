@@ -63,7 +63,9 @@ public void execute(Runnable command) {
 
 2. 对性能要求苛刻的应用，比如要求服务器迅速相应客户请求。
 
-#### ThreadPoolExecutor类参数
+#### ThreadPoolExecutor类
+
+#### 参数
 
 1. **keepAliveTime**：代表的就是线程空闲后多久后销毁，线程的销毁是通过worker的getTask\(\)来实现的。一般来说，Worker会循环获取getTask\(\)，如果getTask\(\)返回null则工作线程worker终结。
 
@@ -82,6 +84,7 @@ public void execute(Runnable command) {
    4. SynchronousQueue;
 
 7. threadFactory：线程工厂，主要用来创建线程；
+
 8. handler：表示当拒绝处理任务时的策略，有以下四种取值：
    1. ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。
    2. ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。 
@@ -105,6 +108,16 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
     ...
 }
 ```
+
+#### 方法
+
+1. **execute\(\)：**向线程池提交一个任务，交由线程池去执行。
+
+2. **submit\(\)：**来向线程池提交任务的，但是它和execute\(\)方法不同，它能够返回任务执行的结果，内部调用的execute\(\)方法，只不过它利用了Future来获取任务执行结果。
+
+3. **shutdown\(\)：**用来关闭线程池的
+
+4. **shutdownNow\(\)：**用来关闭线程池的
 
 #### 线程池调优
 
