@@ -16,5 +16,9 @@ session cookie区别
 
 
 
+笔试公式：
+
 图片：输出尺寸=\(输入尺寸-filter尺寸+2\*padding）/stride+1
+
+逻辑页=逻辑地址/页面大小
 
