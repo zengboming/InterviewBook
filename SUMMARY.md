@@ -20,6 +20,7 @@
     * ArrayList源码
     * [ConcurrentMap源码](chapter1/ji-he-lei/concurrentmapyuan-ma.md)
     * Vector源码
+    * [Fail-fast](chapter1/ji-he-lei/fail-fast.md)
   * [反射](chapter1/fan-she.md)
   * [泛型](chapter1/fan-xing.md)
   * [值传递和引用传递](chapter1/zhi-chuan-di-he-yin-yong-chuan-di.md)
