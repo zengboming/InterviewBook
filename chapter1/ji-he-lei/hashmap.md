@@ -245,5 +245,5 @@ void resize(int newCapacity) {
 
 ### JDK 1.8
 
-链的长度大于8转换成红黑树
+链的长度大于8转换成红黑树，利用红黑树快速增删改查的特点提高HashMap的性能。
 
