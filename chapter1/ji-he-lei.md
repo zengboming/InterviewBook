@@ -132,15 +132,15 @@ Map - ConcurrentHashMap
 
 3. TreeSet底层是红黑树，HashSet底层是哈希表，LinkedHashSet底层是由哈希表和链表组成。
 
-#### ArrayList、LinkedList、Vector 区别：
+#### ArrayList、LinkedList区别：
 
-1. 随机存取：ArrayList是基于可变大小的数组实现，LinkedList是链接列表的实现。这也就决定了对于随机访问的get和set的操作，ArrayList要优于LinkedList，因为LinkedList要移动指针。
+1. 随机存取：ArrayList是基于动态数组实现，LinkedList是双向循环链接列表的实现。这也就决定了对于随机访问的get和set的操作，ArrayList要优于LinkedList，因为LinkedList要移动指针。
 
 2. 插入和删除：LinkedList要好一些，因为ArrayList要移动数据，更新索引。
 
 3. 内存消耗：LinkedList需要更多的内存，因为需要维护指向后继结点的指针。
 
-4. ArrayList 线程不安全，Vector线程安全。
+4. 扩容：ArrayList如果容量不够，需要扩容1.5倍。
 
 #### HashMap、HashTable 区别：
 
@@ -149,8 +149,6 @@ Map - ConcurrentHashMap
 2. HashMap允许NULL，HashTable不允许NULL
 
 3. HashTable同步，HashMap不是
-
-
 
 
 
