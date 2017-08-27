@@ -142,6 +142,12 @@ Map - ConcurrentHashMap
 
 4. 扩容：ArrayList如果容量不够，需要扩容1.5倍。
 
+#### ArrayList、Vector区别
+
+1. Vector的方法是同步的，是线程安全你的。ArrayList不是。
+2. ArrayList性能更好
+3. 扩容的时候Vector是2倍，ArrayList是1.5倍。
+
 #### HashMap、HashTable 区别：
 
 1. HashMap的迭代器\(Iterator\)是fail-fast迭代器，而Hashtable的enumerator\(列举\)迭代器不是fail-fast的。
