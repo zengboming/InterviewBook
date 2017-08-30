@@ -12,8 +12,18 @@
 
 #### 参数设置
 
-1. 编译器设置JVM参数（Eclipse/IDEA）:   -Xmx1024m -Xms1024m
+1. 编译器设置JVM参数（Eclipse/IDEA）:   -Xmx1024m -Xms1024m
 2. 在Tomcat服务器上设置JVM参数：set JAVA\_OPTS=-Xmx512m -Xms512m
+
+#### 查看堆大小
+
+1. Runtime.getRuntime\(\).maxMemory\(\);
+2. 在命令行 执行jvisualvm 命令
+3. %java\_home%\bin 目录下点击jvisualvm.exe
+4. 在命令行执行jconsole 命令
+5. %java\_home%\bin 目录下点击jconsole.exe
+
+
 
 
 
