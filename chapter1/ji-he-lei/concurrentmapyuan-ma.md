@@ -76,7 +76,40 @@ get不加锁，value为volatile类型。不变性的访问不需要同步，从�
  }
 ```
 
-#### 
+#### put
+
+```
+ V put(K key, int hash, V value, boolean onlyIfAbsent) {  
+     lock();  
+     try {  
+         int c = count;  
+         if (c++ > threshold) // ensure capacity  
+             rehash();  
+         HashEntry<K,V>[] tab = table;  
+         int index = hash & (tab.length - 1);  
+         HashEntry<K,V> first = tab[index];  
+         HashEntry<K,V> e = first;  
+         while (e != null && (e.hash != hash || !key.equals(e.key)))  
+             e = e.next;  
+   
+         V oldValue;  
+         if (e != null) {  
+             oldValue = e.value;  
+             if (!onlyIfAbsent)  
+                 e.value = value;  
+         }  
+         else {  
+             oldValue = null;  
+             ++modCount;  
+             tab[index] = new HashEntry<K,V>(key, hash, first, value);  
+             count = c; // write-volatile  
+         }  
+         return oldValue;  
+     } finally {  
+         unlock();  
+     }  
+ }
+```
 
 #### JDK1.8
 
