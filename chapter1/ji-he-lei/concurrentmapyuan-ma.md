@@ -39,7 +39,8 @@ remove
   hash = hash(key.hashCode());  
      return segmentFor(hash).remove(key, hash, null);  
  }  
-整个操作是先定位到段，然后委托给段的remove操作。当多个删除操作并发进行时，只要它们所在的段不相同，它们就可以同时进行。下面是Segment的remove方法实现：
+//整个操作是先定位到段，然后委托给段的remove操作。当多个删除操作并发进行时，只要它们所在的段不相同，它们就可以同时进行。
+//下面是Segment的remove方法实现：
  V remove(Object key, int hash, Object value) {  
      lock();  
      try {  
@@ -50,7 +51,7 @@ remove
          HashEntry<K,V> e = first;  
          while (e != null && (e.hash != hash || !key.equals(e.key)))  
              e = e.next;  
-   
+
          V oldValue = null;  
          if (e != null) {  
              V v = e.value;  
