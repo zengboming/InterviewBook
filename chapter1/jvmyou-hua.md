@@ -10,5 +10,10 @@
 | -XX:SurvivorRatio | Eden与Survivor的大小比值 | 8 | 设置为8,则两个Survivor区与一个Eden区的比值为2:8,一个Survivor区占整个年轻代的1/10 |
 | -Xss | 每个线程的堆栈大小 |  | JDK5.0以后每个线程堆栈大小为1M,以前每个线程堆栈大小为256K. |
 
+#### 参数设置
+
+1. 编译器设置JVM参数（Eclipse/IDEA）:   -Xmx1024m -Xms1024m
+2. 在Tomcat服务器上设置JVM参数：set JAVA\_OPTS=-Xmx512m -Xms512m
+
 
 
