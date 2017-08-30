@@ -15,7 +15,7 @@ ConcurrentHashMap是由Segment数组结构和HashEntry数组结构组成。Segme
 
 #### 源码解析
 
- ConcurrentHashMap中主要实体类就是三个：ConcurrentHashMap（整个Hash表）,Segment（桶），HashEntry（节点）。
+ConcurrentHashMap中主要实体类就是三个：ConcurrentHashMap（整个Hash表）,Segment（桶），HashEntry（节点）。
 
 ```
  static final class HashEntry<K,V> {  
@@ -23,7 +23,7 @@ ConcurrentHashMap是由Segment数组结构和HashEntry数组结构组成。Segme
      final int hash;  
      volatile V value;  
      final HashEntry<K,V> next;  
- } 
+ }
 ```
 
 put头插法，因为next指针为final的，不可修改。
@@ -32,9 +32,50 @@ remove，如果删除中间结点，则需要将要删除节点的前面所有�
 
 get不加锁，value为volatile类型。
 
+remove
+
+```
+ public V remove(Object key) {  
+  hash = hash(key.hashCode());  
+     return segmentFor(hash).remove(key, hash, null);  
+ }  
+整个操作是先定位到段，然后委托给段的remove操作。当多个删除操作并发进行时，只要它们所在的段不相同，它们就可以同时进行。下面是Segment的remove方法实现：
+ V remove(Object key, int hash, Object value) {  
+     lock();  
+     try {  
+         int c = count - 1;  
+         HashEntry<K,V>[] tab = table;  
+         int index = hash & (tab.length - 1);  
+         HashEntry<K,V> first = tab[index];  
+         HashEntry<K,V> e = first;  
+         while (e != null && (e.hash != hash || !key.equals(e.key)))  
+             e = e.next;  
+   
+         V oldValue = null;  
+         if (e != null) {  
+             V v = e.value;  
+             if (value == null || value.equals(v)) {  
+                 oldValue = v;  
+                 // All entries following removed node can stay  
+                 // in list, but all preceding ones need to be  
+                 // cloned.  
+                 ++modCount;  
+                 HashEntry<K,V> newFirst = e.next;  
+                 *for (HashEntry<K,V> p = first; p != e; p = p.next)  
+                     *newFirst = new HashEntry<K,V>(p.key, p.hash,  
+                                                   newFirst, p.value);  
+                 tab[index] = newFirst;  
+                 count = c; // write-volatile  
+             }  
+         }  
+         return oldValue;  
+     } finally {  
+         unlock();  
+     }  
+ }
+```
+
 #### JDK1.8
 
 它摒弃了Segment（锁段）的概念，而是启用了一种全新的方式实现,利用CAS算法。它沿用了与它同时期的HashMap版本的思想，底层依然由“数组”+链表+红黑树的方式思想，但是为了做到并发，又增加了很多辅助的类，例如TreeBin，Traverser等对象内部类。
-
-
 
