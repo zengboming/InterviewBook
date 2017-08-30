@@ -30,9 +30,9 @@ put头插法，因为next指针为final的，不可修改。
 
 remove，如果删除中间结点，则需要将要删除节点的前面所有节点整个复制一遍，最后一个节点指向要删除结点的下一个结点。
 
-get不加锁，value为volatile类型。
+get不加锁，value为volatile类型。不变性的访问不需要同步，从而节约读的时间。
 
-remove
+#### remove
 
 ```
  public V remove(Object key) {  
@@ -75,6 +75,8 @@ remove
      }  
  }
 ```
+
+#### 
 
 #### JDK1.8
 
