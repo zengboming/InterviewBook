@@ -156,5 +156,11 @@ Map - ConcurrentHashMap
 
 3. HashTable同步，HashMap不是
 
+#### Collection 和 Collections的区别
+
+Collection是集合类的上级接口，子接口主要有Set 和List、Queue。
+
+Collections是针对集合类的一个辅助类，提供了操作集合的工具方法：一系列静态方法实现对各种集合的搜索、排序、线程安全化等操作。
+
 
 
