@@ -33,7 +33,7 @@ HotSpot虚拟机将其物理上划分为新生代（young generation）、老年
 
    大对象和长期存活的对象将直接进入老年代。大对象：需要大量连续内存空间的对象，如很长的字符串和数组。长期存活的对象：年龄大于默认15岁的对象。
 
-4. **永久代**（ permanent generation ）
+4. **永久代**（ permanent generation ）（不在堆中，在方法区）
 
    JDK8之前，类的元数据如方法数据、方法信息、运行时常量池等被保存在永久代中。永久代是方法区的一种实现。
 
@@ -125,7 +125,7 @@ JAVA有四种引用类型：StrongReference、SoftReference、WeakReference和 P
 
 #### GC调优
 
-在设计GC的时候，就必须在停顿时间和回收率之间进行权衡。
+对于GC的性能主要有2个方面的指标：吞吐量throughput（工作时间不算gc的时间占总的时间比）和暂停pause（gc发生时app对外显示的无法响应）。
 
 **Stop-the-world**
 
