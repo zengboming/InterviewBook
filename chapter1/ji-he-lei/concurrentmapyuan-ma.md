@@ -15,7 +15,7 @@ ConcurrentHashMap是由Segment数组结构和HashEntry数组结构组成。Segme
 
 #### 源码解析
 
-ConcurrentHashMap中主要实体类就是三个：ConcurrentHashMap（整个Hash表）,Segment（桶），HashEntry（节点）。
+ConcurrentHashMap由Segment（桶）和HashEntry（节点）构成。
 
 ```
  static final class HashEntry<K,V> {  
@@ -26,11 +26,13 @@ ConcurrentHashMap中主要实体类就是三个：ConcurrentHashMap（整个Hash
  }
 ```
 
-put头插法，因为next指针为final的，不可修改。
+put：头插法，因为next指针为final的，不可修改。
 
-remove，如果删除中间结点，则需要将要删除节点的前面所有节点整个复制一遍，最后一个节点指向要删除结点的下一个结点。
+remove：如果删除中间结点，则需要将要删除节点的前面所有节点整个复制一遍，最后一个节点指向要删除结点的下一个结点。
 
-get不加锁，value为volatile类型。不变性的访问不需要同步，从而节约读的时间。
+get：不加锁，value为volatile类型。不变性的访问不需要同步，从而节约读的时间。
+
+构造函数：传入参数分别为 1、初始容量，默认16 2、装载因子 装载因子用于rehash的判定，就是当ConcurrentHashMap中的元素大于装载因子\*最大容量时进行扩容，默认0.75 3、并发级别 这个值用来确定Segment的个数，Segment的个数是大于等于concurrencyLevel的第一个2的n次方的数。默认值为static final int DEFAULT\_CONCURRENCY\_LEVEL = 16;
 
 #### remove
 
@@ -130,6 +132,8 @@ get不加锁，value为volatile类型。不变性的访问不需要同步，从�
      return null;  
  }
 ```
+
+get操作不需要锁。第一步是访问count变量，这是一个volatile变量，由于所有的修改操作在进行结构修改时都会在最后一步写count 变量，通过这种机制保证get操作能够得到几乎最新的结构更新。对于非结构更新，也就是结点值的改变，由于HashEntry的value变量是 volatile的，也能保证读取到最新的值。
 
 #### JDK1.8
 
