@@ -8,7 +8,7 @@
 | -XX:PermSize | 设置持久代初始值 | 物理内存的1/64 |  |
 | -XX:MaxPermSize | 设置持久代最大值 | 物理内存的1/64 |  |
 | -XX:SurvivorRatio | Eden与Survivor的大小比值 | 8 | 设置为8,则两个Survivor区与一个Eden区的比值为2:8,一个Survivor区占整个年轻代的1/10 |
-|  |  |  |  |
+| -Xss | 每个线程的堆栈大小 |  | JDK5.0以后每个线程堆栈大小为1M,以前每个线程堆栈大小为256K. |
 
 
 
