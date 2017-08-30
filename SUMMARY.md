@@ -31,7 +31,7 @@
   * [for和foreach](chapter1/forhe-foreach.md)
   * [equals](chapter1/equals.md)
   * [String](chapter1/string.md)
-  * [JVM参数和优化](chapter1/jvmyou-hua.md)
+  * [OOM](chapter1/oom.md)
 * [JAVA框架](javakuang-jia.md)
   * [Struts](javakuang-jia/struts.md)
   * [Spring](javakuang-jia/spring.md)
