@@ -32,7 +32,7 @@ remove：如果删除中间结点，则需要将要删除节点的前面所有�
 
 get：不加锁，value为volatile类型。不变性的访问不需要同步，从而节约读的时间。
 
-构造函数：传入参数分别为 1、初始容量，默认16 2、装载因子 装载因子用于rehash的判定，就是当ConcurrentHashMap中的元素大于装载因子\*最大容量时进行扩容，默认0.75 3、并发级别 这个值用来确定Segment的个数，Segment的个数是大于等于concurrencyLevel的第一个2的n次方的数。默认值为static final int DEFAULT\_CONCURRENCY\_LEVEL = 16;
+构造函数：传入参数分别为 1、初始容量，默认16 2、装载因子 装载因子用于rehash的判定，就是当ConcurrentHashMap中的元素大于装载因子\*最大容量时进行扩容，默认0.75 3、并发级别 这个值用来确定Segment的个数，Segment的个数是大于等于concurrencyLevel的第一个2的n次方的数。默认值为static final int DEFAULT\_CONCURRENCY\_LEVEL = 16。初始化segmentShift和segmentMask（这两个全局变量在定位segment时的哈希算法里需要使用），默认情况下segmentShift为28，segmentMask为15
 
 #### remove
 
@@ -113,6 +113,10 @@ get：不加锁，value为volatile类型。不变性的访问不需要同步，�
  }
 ```
 
+1. 判断value是否为null，如果为null，直接抛出异常。
+2. key通过一次hash运算得到一个hash值。将得到hash值向右按位移动segmentShift位，然后再与segmentMask做&运算得到segment的索引j。即segmentFor方法
+3. 使用Unsafe的方式从Segment数组中获取该索引对应的Segment对象。向这个Segment对象中put值，这个put操作也基本是一样的步骤（通过&运算获取HashEntry的索引，然后set）。
+
 #### get
 
 ```
@@ -133,7 +137,14 @@ get：不加锁，value为volatile类型。不变性的访问不需要同步，�
  }
 ```
 
-get操作不需要锁。第一步是访问count变量，这是一个volatile变量，由于所有的修改操作在进行结构修改时都会在最后一步写count 变量，通过这种机制保证get操作能够得到几乎最新的结构更新。对于非结构更新，也就是结点值的改变，由于HashEntry的value变量是 volatile的，也能保证读取到最新的值。
+get操作不需要锁。第一步是访问count变量，这是一个volatile变量，由于所有的修改操作在进行结构修改时都会在最后一步写count 变量，通过这种机制保证get操作能够得到几乎最新的结构更新。对于非结构更新，也就是结点值的改变，由于HashEntry的value变量是 volatile的，也能保证读取到最新的值。
+
+1. 和put操作一样，先通过key进行hash确定应该去哪个Segment中取数据。
+2. 使用Unsafe获取对应的Segment，然后再进行一次&运算得到HashEntry链表的位置，然后从链表头开始遍历整个链表（因为Hash可能会有碰撞，所以用一个链表保存），如果找到对应的key，则返回对应的value值，如果链表遍历完都没有找到对应的key，则说明Map中不包含该key，返回null
+
+**定位Segment的hash算法：\(hash &gt;&gt;&gt; segmentShift\) & segmentMask**
+
+**定位HashEntry所使用的hash算法：int index = hash & \(tab.length - 1\);**
 
 #### JDK1.8
 
