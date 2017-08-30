@@ -8,11 +8,15 @@ GC 内存模型 线程安全 hashmap spring源码 异步IO   jdk1.6 1.7 1.8特�
 
 字典树 建树过程
 
-musql锁 范式 事务
+musql锁 范式 事务 wait connect timeout 间隙锁 next-key锁
 
 servlet  生命周期 对象
 
 session cookie区别
+
+long转int丢精度
+
+
 
 
 
