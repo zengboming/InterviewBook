@@ -16,6 +16,7 @@
     * [线程状态](chapter1/xian-cheng-zhuang-tai.md)
     * [同步/异步/阻塞](chapter1/tong-6b65-yi-6b65-zu-sai.md)
     * [ThreadLocal](chapter1/threadlocal.md)
+    * [乐观锁/悲观锁](chapter1/le-guan-9501-bei-guan-suo.md)
   * [集合类](chapter1/ji-he-lei.md)
     * [HashMap源码](chapter1/ji-he-lei/hashmap.md)
     * [HashTable源码](chapter1/ji-he-lei/hashtableyuan-ma.md)
