@@ -91,7 +91,7 @@ get不加锁，value为volatile类型。不变性的访问不需要同步，从�
          HashEntry<K,V> e = first;  
          while (e != null && (e.hash != hash || !key.equals(e.key)))  
              e = e.next;  
-   
+
          V oldValue;  
          if (e != null) {  
              oldValue = e.value;  
@@ -108,6 +108,26 @@ get不加锁，value为volatile类型。不变性的访问不需要同步，从�
      } finally {  
          unlock();  
      }  
+ }
+```
+
+#### get
+
+```
+ V get(Object key, int hash) {  
+     if (count != 0) { // read-volatile 当前桶的数据个数是否为0 
+         HashEntry<K,V> e = getFirst(hash);  得到头节点
+         while (e != null) {  
+            if (e.hash == hash && key.equals(e.key)) {  
+                 V v = e.value;  
+                 if (v != null)  
+                     return v;  
+                 return readValueUnderLock(e); // recheck  
+             }  
+             e = e.next;  
+         }  
+     }  
+     return null;  
  }
 ```
 
