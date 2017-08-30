@@ -15,12 +15,13 @@
     * [Timer](chapter1/timer.md)
     * [线程状态](chapter1/xian-cheng-zhuang-tai.md)
     * [同步/异步/阻塞](chapter1/tong-6b65-yi-6b65-zu-sai.md)
+    * [ThreadLocal](chapter1/threadlocal.md)
   * [集合类](chapter1/ji-he-lei.md)
     * [HashMap源码](chapter1/ji-he-lei/hashmap.md)
     * [HashTable源码](chapter1/ji-he-lei/hashtableyuan-ma.md)
-    * ArrayList源码
+    * [ArrayList源码](chapter1/ji-he-lei/arraylistyuan-ma.md)
     * [ConcurrenHashtMap源码](chapter1/ji-he-lei/concurrentmapyuan-ma.md)
-    * Vector源码
+    * [Vector源码](chapter1/ji-he-lei/vectoryuan-ma.md)
     * [Fail-fast](chapter1/ji-he-lei/fail-fast.md)
   * [反射](chapter1/fan-she.md)
   * [泛型](chapter1/fan-xing.md)
