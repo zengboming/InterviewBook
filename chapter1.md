@@ -14,23 +14,39 @@ final修饰的变量是常量，必须进行初始化，可以显示初始化，
 
 ```
 public class Enclosingone {
-	//非静态内部类
-	public class InsideOne {}
-	//静态内部类
-	public static class InsideTwo{}
+    //非静态内部类
+    public class InsideOne {}
+    //静态内部类
+    public static class InsideTwo{}
 }
 
 public class Test {
-	public static void main(String[] args) {
-	// 构造内部类对象需要外部类的引用
-	Enclosingone.InsideOne obj1 = new Enclosingone().new InsideOne();
-	// 构造静态内部类的对象
-	Enclosingone.InsideTwo obj2 = new Enclosingone.InsideTwo();
-	}
+    public static void main(String[] args) {
+    // 构造内部类对象需要外部类的引用
+    Enclosingone.InsideOne obj1 = new Enclosingone().new InsideOne();
+    // 构造静态内部类的对象
+    Enclosingone.InsideTwo obj2 = new Enclosingone.InsideTwo();
+    }
 }
 ```
 
 静态内部类不需要有指向外部类的引用。静态内部类不能访问外部类的非静态成员，只能访问外部类的静态成员。
 
 非静态内部类需要持有对外部类的引用。非静态内部类能够访问外部类的静态和非静态成员。
+
+### **面向对象的五大基本原则\(solid\)**
+
+1. S单一职责`SRP`:Single-Responsibility Principle 一个类,最好只做一件事,只有一个引起它的变化。单一职责原则可以看做是低耦合,高内聚在面向对象原则的引申,将职责定义为引起变化的原因,以提高内聚性减少引起变化的原因。
+
+2. O开放封闭原则`OCP`:Open-Closed Principle 软件实体应该是可扩展的,而不是可修改的。对扩展开放,对修改封闭
+
+3. L里氏替换原则`LSP`:Liskov-Substitution Principle 子类必须能够替换其基类。这一思想表现为对继承机制的约束规范,只有子类能够替换其基类时,才能够保证系统在运行期内识别子类,这是保证继承复用的基础。
+
+4. I接口隔离原则`ISP`:Interface-Segregation Principle 使用多个小的接口,而不是一个大的总接口
+
+5. D依赖倒置原则`DIP`:Dependency-Inversion Principle 依赖于抽象。具体而言就是高层模块不依赖于底层模块,二者共同依赖于抽象。抽象不依赖于具体,具体依赖于抽象。
+
+
+
+
 

@@ -58,6 +58,7 @@
   * [深度优先/广度优先](suan-fa-yu-shu-ju-jie-gou/shen-du-you-5148-guang-du-you-xian.md)
   * 最短路径
   * [MIT HEKMEM](suan-fa-yu-shu-ju-jie-gou/mit-hekmem.md)
+  * [正则表达式](suan-fa-yu-shu-ju-jie-gou/zheng-ze-biao-da-shi.md)
 * [数据结构](suan-fa-yu-shu-ju-jie-gou.md)
   * [树](suan-fa-yu-shu-ju-jie-gou/shu.md)
 * 设计模式
