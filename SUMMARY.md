@@ -25,6 +25,7 @@
     * [ConcurrenHashtMap源码](chapter1/ji-he-lei/concurrentmapyuan-ma.md)
     * [Vector源码](chapter1/ji-he-lei/vectoryuan-ma.md)
     * [Fail-fast](chapter1/ji-he-lei/fail-fast.md)
+    * [LinkedList](chapter1/ji-he-lei/linkedlist.md)
   * [反射](chapter1/fan-she.md)
   * [泛型](chapter1/fan-xing.md)
   * [值传递和引用传递](chapter1/zhi-chuan-di-he-yin-yong-chuan-di.md)
