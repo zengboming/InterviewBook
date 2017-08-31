@@ -55,7 +55,7 @@
   * [磁盘和文件](cao-zuo-xi-tong/ci-pan-he-wen-jian.md)
   * [死锁](cao-zuo-xi-tong/zhong-duan.md)
   * [CPU](cao-zuo-xi-tong/cpu.md)
-* 算法
+* [算法](suan-fa.md)
   * [一致性哈希算法](suan-fa-yu-shu-ju-jie-gou/yi-zhi-xing-ha-xi.md)
   * [链表有环](suan-fa-yu-shu-ju-jie-gou/lian-biao-you-huan.md)
   * [排序](suan-fa-yu-shu-ju-jie-gou/pai-xu.md)
@@ -64,6 +64,7 @@
   * 最短路径
   * [MIT HEKMEM](suan-fa-yu-shu-ju-jie-gou/mit-hekmem.md)
   * [正则表达式](suan-fa-yu-shu-ju-jie-gou/zheng-ze-biao-da-shi.md)
+  * [随机数问题](suan-fa-yu-shu-ju-jie-gou/sui-ji-shu-wen-ti.md)
 * [数据结构](suan-fa-yu-shu-ju-jie-gou.md)
   * [树](suan-fa-yu-shu-ju-jie-gou/shu.md)
 * 设计模式
