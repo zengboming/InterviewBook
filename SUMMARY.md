@@ -70,7 +70,7 @@
 * 设计模式
   * [面向对象](mian-xiang-dui-xiang.md)
   * [生产者消费者模式](sheng-chan-zhe-xiao-fei-zhe-mo-shi.md)
-  * 单例模式
+  * [单例模式](dan-li-mo-shi.md)
 * [数据库](shu-ju-ku.md)
   * [索引](suo-yin.md)
   * [事务](shi-wu.md)
