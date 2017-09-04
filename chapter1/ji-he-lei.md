@@ -29,7 +29,7 @@ Map - ConcurrentHashMap
 
 * #### ArrayList                            非线程安全
 
-  默认大小10个元素
+  **默认大小10个元素，扩容1.5倍**
 
   ArrrayList 底层的数据结构是数组，支持随机访问。访问时间复杂度是 O\(1\)。
 
@@ -40,6 +40,8 @@ Map - ConcurrentHashMap
 * #### Vector                                 线程安全
 
   底层数据结构是数组，支持随机访问。
+
+  **初始容量为10-，扩容2倍**
 
 * #### Stack                                   线程安全
 
