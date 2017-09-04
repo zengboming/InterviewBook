@@ -73,7 +73,7 @@ Map - ConcurrentHashMap
 
   **原理**：维护了一个Entry数组，Entry内部类有key,value，hash和next四个字段，其中next也是一个Entry类型。可以将Entry数组理解为一个个的散列桶。每一个桶实际上是一个单链表。当执行put操作时，会根据key的hashcode定位到相应的桶。遍历单链表检查该key是否已经存在，如果存在，覆盖该value，反之，新建一个新的Entry，并放在单链表的头部。当通过传递key调用get方法时，它再次使用key.hashCode\(\)来找到相应的散列桶，然后使用key.equals\(\)方法找出单链表中正确的Entry，然后返回它的值。
 
-  初始容量，默认大小16个元素。
+  初始容量，**默认大小16个元素，loadFactor的默认值为0.75，扩容2倍**。
 
 * #### HashTable                           线程安全      \|  KV不允许NULL
 
@@ -95,7 +95,7 @@ Map - ConcurrentHashMap
 
   **结构**：是由Segment数组结构和HashEntry数组结构组成。Segment是一种可重入互斥锁ReentrantLock，在ConcurrentHashMap里扮演锁的角色，HashEntry则用于存储键值对数据。一个ConcurrentHashMap里包含一个Segment数组，Segment的结构和HashMap类似，是一种数组和链表结构， 一个Segment里包含一个HashEntry数组，每个HashEntry是一个链表结构的元素，当对某个HashEntry数组的数据进行修改时，必须首先获得它对应的Segment锁。
 
-  初始容量，默认大小16个元素。装载因子，默认0.75。并发级别，默认16。
+  初始容量，**默认大小16个元素。装载因子，默认0.75。并发级别，默认16。**
 
   并发级别（concurrencyLevel）：这个值用来确定Segment的个数，Segment的个数是大于等于concurrencyLevel的第一个2的n次方的数。ConcurrentHashMap依据并发级别把实际 map 划分成若干部分来实现它的可扩展性和线程安全。
 
@@ -161,6 +161,4 @@ Map - ConcurrentHashMap
 Collection是集合类的上级接口，子接口主要有Set 和List、Queue。
 
 Collections是针对集合类的一个辅助类，提供了操作集合的工具方法：一系列静态方法实现对各种集合的搜索、排序、线程安全化等操作。
-
-
 
