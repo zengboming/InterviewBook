@@ -84,3 +84,28 @@ Java 8 API同样还提供了很多全新的函数式接口来让工作更加方�
 
 HashMap/ConcurrentHashMap
 
+#### 创建对象的方法
+
+1. new
+2. 反射 
+   ```
+   Employee emp = Employee.class.newInstance();
+   ```
+3. clone方法
+   无论何时我们调用一个对象的clone方法，jvm就会创建一个新的对象，将前面对象的内容全部拷贝进去。用clone方法创建对象并不会调用任何构造函数。要使用clone方法，我们需要先实现Cloneable接口并实现其定义的clone方法。
+
+   ```
+   Employee emp = (Employee) emp3.clone();
+   ```
+
+4. 使用反序列化
+
+   当我们序列化和反序列化一个对象，jvm会给我们创建一个单独的对象。在反序列化时，jvm创建对象并不会调用任何构造函数。为了反序列化一个对象，我们需要实现Serializable接口。
+
+   ```
+   ObjectInputStream in = new ObjectInputStream(new FileInputStream("data.obj"));
+   Employee emp = (Employee) in.readObject();
+   ```
+
+
+
