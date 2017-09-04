@@ -88,10 +88,13 @@ HashMap/ConcurrentHashMap
 
 1. new
 2. 反射 
+   调用[Java](http://lib.csdn.net/base/java).lang.Class或者java.lang.reflect.Constructor类的newInstance\(\)实例方法。
+
    ```
    Employee emp = Employee.class.newInstance();
    ```
-3. clone方法
+
+3. clone方法  
    无论何时我们调用一个对象的clone方法，jvm就会创建一个新的对象，将前面对象的内容全部拷贝进去。用clone方法创建对象并不会调用任何构造函数。要使用clone方法，我们需要先实现Cloneable接口并实现其定义的clone方法。
 
    ```
