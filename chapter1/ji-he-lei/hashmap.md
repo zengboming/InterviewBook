@@ -128,7 +128,7 @@ public HashMap() {
 
 1.7 table在创建hashmap时分配空间，而1.8在put的时候分配，如果table为空，则为table分配空间。
 
-当程序试图将一个key-value对放入HashMap中时，程序首先根据该 key 的 hashCode\(\) 返回值决定该 Entry 的存储位置：如果两个 Entry 的 key 的 hashCode\(\) 返回值相同，那它们的存储位置相同。如果这两个 Entry 的 key 通过 equals 比较返回 true，新添加 Entry 的 value 将覆盖集合中原有 Entry 的 value，但key不会覆盖。如果这两个 Entry 的 key 通过 equals 比较返回 false，新添加的 Entry 将与集合中原有 Entry 形成 Entry 链，而且新添加的 Entry 位于 Entry 链的头部。
+当程序试图将一个key-value对放入HashMap中时，程序首先根据该 key 的 hashCode\(\) 返回值决定该 Entry 的存储位置：如果两个 Entry 的 key 的 hashCode\(\) 返回值相同，那它们的存储位置相同。如果这两个 Entry 的 key 通过 equals 比较返回 true，新添加 Entry 的 value 将覆盖集合中原有 Entry 的 value，但key不会覆盖。如果这两个 Entry 的 key 通过 equals 比较返回 false，新添加的 Entry 将与集合中原有 Entry 形成 Entry 链，而且新添加的 Entry 位于 Entry** 链的头部**。
 
 ```
 public V put(K key, V value) {
@@ -245,5 +245,15 @@ void resize(int newCapacity) {
 
 ### JDK 1.8
 
-链的长度大于8转换成红黑树，利用红黑树快速增删改查的特点提高HashMap的性能。
+链的长度大于8转换成红黑树，树中元素个数太少的话，会进行修剪或者直接还原成链表结构。  
+利用红黑树**快速增删改查**的特点提高HashMap的性能。
+
+#### 为什么使用红黑树
+
+1. 当原来的HashMap 中有大量的元素都存放到同一个桶中时，这个桶下有一条长长的链表，影响删改查的效率\(不影响增，因为头插\)。
+2. 红黑树查找时间为o\(logn\)，之前链表为o\(n\)
+3. 红黑树插入时间为o\(logn\)，之前链表为o\(1\)
+4. 红黑树删除时间为o\(logn\)，之前链表为o\(n\)
+
+
 
