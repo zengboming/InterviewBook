@@ -87,7 +87,7 @@ HashMap/ConcurrentHashMap
 #### 创建对象的方法
 
 1. new
-2. 反射 
+2. 反射   
    调用[Java](http://lib.csdn.net/base/java).lang.Class或者java.lang.reflect.Constructor类的newInstance\(\)实例方法。
 
    ```
