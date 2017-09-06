@@ -62,7 +62,7 @@
 
    Read Commited 不允许脏读，但会出现非重复读。
 
-   大多数数据库的默认级别就是Read committed，比如Sql Server ,Oracle。
+   大多数**数据库的默认级别**就是Read committed，比如Mysql，Sql Server ,Oracle。
 
 3. **可重复读\(Repeatable Read\)：**
 
