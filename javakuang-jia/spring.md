@@ -48,10 +48,10 @@ Spring AOP 的实现原理其实很简单：
 
 ### Spring配置方式
 
-1. 基于XML的配置
+1. 基于XML的配置  
    XML格式的配置文件，通常用&lt;beans&gt;开头，然后一系列的bean定义和专门的应用配置选项组成。Spring有以下主要的命名空间：context、beans、jdbc、tx、aop、mvc和aso。
 
-2. 基于注解的配置
+2. 基于注解的配置  
    只需要在相关类上、方法上或者字段声明上使用注解即可。注解注入将会被容器在XML注入之前被处理，所以XML会覆盖掉前者对于同一个属性的处理结果。
 
    1. @Required：该注解应用于设值方法。
@@ -62,7 +62,7 @@ Spring AOP 的实现原理其实很简单：
 
    4. @Resource：
 
-3. 基于Java的配置
+3. 基于Java的配置  
    Spring对Java配置的支持是由@Configuration注解和@Bean注解来实现的。由@Bean注解的方法将会实例化、配置和初始化一个新对象，这个对象将由Spring的IoC容器来管理。被@Configuration所注解的类则表示这个类的主要目的是作为bean定义的资源。被@Configuration声明的类可以通过在同一个类的内部调用@bean方法来设置嵌入bean的依赖关系。
 
 ### Spring Bean
@@ -71,7 +71,7 @@ Spring Beans是构成Spring应用核心的Java对象。这些对象由Spring IOC
 
 ### Spring Bean的生命周期
 
-Bean在Spring中的生命周期如下：
+在一个bean实例被初始化时，需要执行一系列的初始化操作以达到可用的状态。当一个bean不在被调用时需要进行相关的析构操作，并从bean容器中移除。Bean在Spring中的生命周期如下：
 
 **实例化**。Spring通过new关键字将一个Bean进行实例化，JavaBean都有默认的构造函数，因此不需要提供构造参数。
 
@@ -103,5 +103,14 @@ Bean在Spring中的生命周期如下：
 
 到这个时候，Bean已经可以被应用系统使用了，并且将被保留在Bean Factory中知道它不再需要。
 
-[https://zhengjianglong.gitbooks.io/note-of-interview/content/framework/spring.html](https://zhengjianglong.gitbooks.io/note-of-interview/content/framework/spring.html)
+### Spring 用到的设计模式
+
+代理模式—在AOP和remoting中被用的比较多。
+
+1. 单例模式—在spring配置文件中定义的bean默认为单例模式。
+2. 模板方法—用来解决代码重复的问题。比如. [RestTemplate](http://howtodoinjava.com/2015/02/20/spring-restful-client-resttemplate-example/), JmsTemplate, JpaTemplate。
+3. 依赖注入—贯穿于BeanFactory/ ApplicationContext接口的核心理念。
+4. 工厂模式—BeanFactory用来创建对象的实例。
+
+
 
