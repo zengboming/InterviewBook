@@ -40,7 +40,7 @@ Spring AOP 的实现原理其实很简单：
    3. 接口注入
 4. **Spring IOC**：把对象的创建、初始化、销毁交给spring来管理，而不是由开发者控制，实现控制反转。
 
-   1. Spring中的 beans包和 context包构成了Spring框架 IoC容器的基础。
+   1. Spring中的 beans包和 context包构成了Spring框架 IoC容器的基础。
 
    2. BeanFactory是Spring IoC容器的具体实现，用来包装和管理各种bean。
 
@@ -49,8 +49,21 @@ Spring AOP 的实现原理其实很简单：
 ### Spring配置方式
 
 1. 基于XML的配置
+   XML格式的配置文件，通常用&lt;beans&gt;开头，然后一系列的bean定义和专门的应用配置选项组成。Spring有以下主要的命名空间：context、beans、jdbc、tx、aop、mvc和aso。
+
 2. 基于注解的配置
+   只需要在相关类上、方法上或者字段声明上使用注解即可。注解注入将会被容器在XML注入之前被处理，所以XML会覆盖掉前者对于同一个属性的处理结果。
+
+   1. @Required：该注解应用于设值方法。
+
+   2. @Autowired：该注解应用于有值设值方法、非设值方法、构造方法和变量。
+
+   3. @Qualifier：该注解和@Autowired注解搭配使用，用于消除特定bean自动装配的歧义。
+
+   4. @Resource：
+
 3. 基于Java的配置
+   Spring对Java配置的支持是由@Configuration注解和@Bean注解来实现的。由@Bean注解的方法将会实例化、配置和初始化一个新对象，这个对象将由Spring的IoC容器来管理。被@Configuration所注解的类则表示这个类的主要目的是作为bean定义的资源。被@Configuration声明的类可以通过在同一个类的内部调用@bean方法来设置嵌入bean的依赖关系。
 
 ### Spring Bean
 
