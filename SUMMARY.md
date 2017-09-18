@@ -67,6 +67,7 @@
   * [MIT HEKMEM](suan-fa-yu-shu-ju-jie-gou/mit-hekmem.md)
   * [正则表达式](suan-fa-yu-shu-ju-jie-gou/zheng-ze-biao-da-shi.md)
   * [随机数问题](suan-fa-yu-shu-ju-jie-gou/sui-ji-shu-wen-ti.md)
+  * [背包问题](suan-fa-yu-shu-ju-jie-gou/bei-bao-wen-ti.md)
 * [数据结构](suan-fa-yu-shu-ju-jie-gou.md)
   * [树](suan-fa-yu-shu-ju-jie-gou/shu.md)
 * [设计模式](she-ji-mo-shi.md)
