@@ -105,12 +105,10 @@ Spring Beans是构成Spring应用核心的Java对象。这些对象由Spring IOC
 
 ### Spring 用到的设计模式
 
-代理模式—在AOP和remoting中被用的比较多。
-
 1. 单例模式—在spring配置文件中定义的bean默认为单例模式。
-2. 模板方法—用来解决代码重复的问题。比如. [RestTemplate](http://howtodoinjava.com/2015/02/20/spring-restful-client-resttemplate-example/), JmsTemplate, JpaTemplate。
-3. 依赖注入—贯穿于BeanFactory/ ApplicationContext接口的核心理念。
-4. 工厂模式—BeanFactory用来创建对象的实例。
+2. 模板方法—用来解决代码重复的问题。比如. RestTemplate, JmsTemplate, JpaTemplate。
+3. 工厂模式—BeanFactory用来创建对象的实例。
+4. 代理模式—在AOP和remoting中被用的比较多。
 
 
 
