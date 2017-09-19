@@ -80,6 +80,7 @@ public void dfs1(int[][] image, int start, int[] visit) {
 ```
 例子：把1-9放入下面等式中，求使等式成立的所有组合
 _*_ _ = _ _ _ = _ * _ _
+
 public class Main {
     String s = "_*__ = ___ = _*__";
 
