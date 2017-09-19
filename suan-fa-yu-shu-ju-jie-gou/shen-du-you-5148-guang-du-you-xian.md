@@ -11,10 +11,22 @@
 ![](/assets/import123.png)
 
 ```
-
+public void bfs(int[][] image, int start, int[] visite) {
+		int n = image.length;
+		queue.push(start);
+		visite[start] = 1;
+		while(!queue.isEmpty()) {
+			int node = queue.peek();
+			System.out.println(queue.poll() + 1 + " ");
+			for (int i = 0; i < n; i++) {
+				if (image[node][i] == 1 && visite[i] == 0) {
+					queue.offer(i);
+					visite[i] = 1;
+				}
+			}
+		}
+	}
 ```
 
-转自：http://www.jianshu.com/p/70952b51f0c8
-
-
+转自：[http://www.jianshu.com/p/70952b51f0c8](http://www.jianshu.com/p/70952b51f0c8)
 
