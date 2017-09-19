@@ -38,41 +38,43 @@ public void bfs(int[][] image, int start, int[] visite) {
 4. 上一层继续做如上操作，知道所有顶点都访问过。
 
 ```
+//递归实现
 public void dfs(int[][] image, int start, int[] visit) {
-		visit[start] = 1;
-		int n = image.length;
+        visit[start] = 1;
+        int n = image.length;
 
-		for (int i = 0; i < n; i++) {
-			if (visit[i] == 0 && image[start][i] == 1) {
-				dfs(image, i, visit);
-			}
-		}
-		System.out.println(start + 1 + " ");
-	}
+        for (int i = 0; i < n; i++) {
+            if (visit[i] == 0 && image[start][i] == 1) {
+                dfs(image, i, visit);
+            }
+        }
+        System.out.println(start + 1 + " ");
+    }
 ```
 
 ```
+//非递归
 public void dfs1(int[][] image, int start, int[] visit) {
-		stack.push(start);
-		int n = image.length;
-		visit[start] = 1;
-		boolean tag = false;
-		while (!stack.isEmpty()) {
-			tag = false;
-			int top = stack.peek();
-			for (int i = 0; i < n; i++) {
-				if (visit[i] == 0 && image[top][i] == 1) {
-					visit[i] = 1;
-					stack.push(i);
-					tag = true;
-				}
-			}
-			if (!tag) {
-				System.out.println(top + 1 + " ");
-				stack.pop();
-			}
-		}
-	}
+        stack.push(start);
+        int n = image.length;
+        visit[start] = 1;
+        boolean tag = false;
+        while (!stack.isEmpty()) {
+            tag = false;
+            int top = stack.peek();
+            for (int i = 0; i < n; i++) {
+                if (visit[i] == 0 && image[top][i] == 1) {
+                    visit[i] = 1;
+                    stack.push(i);
+                    tag = true;
+                }
+            }
+            if (!tag) {
+                System.out.println(top + 1 + " ");
+                stack.pop();
+            }
+        }
+    }
 ```
 
 转自：[http://www.jianshu.com/p/70952b51f0c8](http://www.jianshu.com/p/70952b51f0c8)
