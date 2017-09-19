@@ -80,43 +80,40 @@ public void dfs1(int[][] image, int start, int[] visit) {
 ```
 例子：把1-9放入下面等式中，求使等式成立的所有组合
 _*_ _ = _ _ _ = _ * _ _
-```
-
-```
 public class Main {
-	String s = "_*__ = ___ = _*__";
+    String s = "_*__ = ___ = _*__";
 
-	public static void main(String[] args) {
-		int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		fun(arr, 0);
-	}
+    public static void main(String[] args) {
+        int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        fun(arr, 0);
+    }
 
-	private static void fun(int[] arr, int start) {
-		if (start == arr.length - 1 && check(arr)) {
-			for (int i = 0; i < arr.length; i++) {
-				System.out.print(arr[i]);
-			}
-			System.out.println();
-		}
-		for (int i = start; i < arr.length; i++) {
-			swap(arr, start, i);
-			fun(arr, start + 1);
-			swap(arr, start, i);
-		}
-	}
+    private static void fun(int[] arr, int start) {
+        if (start == arr.length - 1 && check(arr)) {
+            for (int i = 0; i < arr.length; i++) {
+                System.out.print(arr[i]);
+            }
+            System.out.println();
+        }
+        for (int i = start; i < arr.length; i++) {
+            swap(arr, start, i);
+            fun(arr, start + 1);
+            swap(arr, start, i);
+        }
+    }
 
-	private static boolean check(int[] arr) {
-		int a = arr[0] * (arr[1] * 10 + arr[2]);
-		int b = arr[3] * 100 + arr[4] * 10 + arr[5];
-		int c = arr[6] * (arr[7] * 10 + arr[8]);
-		return a == b && b == c;
-	}
+    private static boolean check(int[] arr) {
+        int a = arr[0] * (arr[1] * 10 + arr[2]);
+        int b = arr[3] * 100 + arr[4] * 10 + arr[5];
+        int c = arr[6] * (arr[7] * 10 + arr[8]);
+        return a == b && b == c;
+    }
 
-	private static void swap(int[] arr, int i, int j) {
-		int tmp = arr[i];
-		arr[i] = arr[j];
-		arr[j] = tmp;
-	}
+    private static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
 }
 ```
 
