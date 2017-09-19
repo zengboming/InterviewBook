@@ -12,17 +12,64 @@
 
 ```
 public void bfs(int[][] image, int start, int[] visite) {
+        int n = image.length;
+        queue.push(start);
+        visite[start] = 1;
+        while(!queue.isEmpty()) {
+            int node = queue.peek();
+            System.out.println(queue.poll() + 1 + " ");
+            for (int i = 0; i < n; i++) {
+                if (image[node][i] == 1 && visite[i] == 0) {
+                    queue.offer(i);
+                    visite[i] = 1;
+                }
+            }
+        }
+    }
+```
+
+### 深度优先搜索（DFS）
+
+深度优先搜索在搜索过程中访问某个顶点后，需要递归地访问此顶点的所有未访问过的相邻顶点。
+
+1. 选择起始顶点涂成灰色，表示还未访问
+2. 从该顶点的邻接顶点中选择一个，继续这个过程（即再寻找邻接结点的邻接结点），一直深入下去，直到一个顶点没有邻接结点了，涂黑它，表示访问过了
+3. 回溯到这个涂黑顶点的上一层顶点，再找这个上一层顶点的其余邻接结点，继续如上操作，如果所有邻接结点往下都访问过了，就把自己涂黑，再回溯到更上一层。
+4. 上一层继续做如上操作，知道所有顶点都访问过。
+
+```
+public void dfs(int[][] image, int start, int[] visit) {
+		visit[start] = 1;
 		int n = image.length;
-		queue.push(start);
-		visite[start] = 1;
-		while(!queue.isEmpty()) {
-			int node = queue.peek();
-			System.out.println(queue.poll() + 1 + " ");
+
+		for (int i = 0; i < n; i++) {
+			if (visit[i] == 0 && image[start][i] == 1) {
+				dfs(image, i, visit);
+			}
+		}
+		System.out.println(start + 1 + " ");
+	}
+```
+
+```
+public void dfs1(int[][] image, int start, int[] visit) {
+		stack.push(start);
+		int n = image.length;
+		visit[start] = 1;
+		boolean tag = false;
+		while (!stack.isEmpty()) {
+			tag = false;
+			int top = stack.peek();
 			for (int i = 0; i < n; i++) {
-				if (image[node][i] == 1 && visite[i] == 0) {
-					queue.offer(i);
-					visite[i] = 1;
+				if (visit[i] == 0 && image[top][i] == 1) {
+					visit[i] = 1;
+					stack.push(i);
+					tag = true;
 				}
+			}
+			if (!tag) {
+				System.out.println(top + 1 + " ");
+				stack.pop();
 			}
 		}
 	}
