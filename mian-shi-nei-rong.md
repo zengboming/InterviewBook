@@ -22,7 +22,9 @@ long转int丢精度
 
 逻辑页=逻辑地址/页面大小
 
-ES优化：http://blog.csdn.net/opensure/article/details/47617437
+ES优化：[http://blog.csdn.net/opensure/article/details/47617437](http://blog.csdn.net/opensure/article/details/47617437)
+
+http://www.jianshu.com/p/4c57a246164c
 
 1. scroll 深度分页开销大，设置最大页
 2. 分片和副本
