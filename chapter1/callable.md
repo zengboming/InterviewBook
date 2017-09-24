@@ -6,7 +6,13 @@
 
 这2种方式都有一个缺陷就是：在执行完任务之后无法获取执行结果。如果需要获取执行结果，就必须通过共享变量或者使用线程通信的方式来达到效果，这样使用起来就比较麻烦。而自从Java 1.5开始，就提供了Callable和Future，通过它们可以在任务执行完毕之后得到任务执行结果。
 
-3.Callable
+    3.Callable
+
+#### Thread和Runnable区别
+
+1. Thread是类，需要继承，而只能继承一个父类，有局限性。
+2. Thread可直接用start\(\)方法启动线程，而Runnable没有start\(\)方法，需要使用new Thread\(object\).start\(\)；
+3. Runnable就可以实现资源共享，而通过Thread类实现，各自线程的资源是独立的，不方便共享。
 
 #### Callable和Runnable
 

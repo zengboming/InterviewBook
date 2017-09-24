@@ -12,7 +12,7 @@
   * [线程](chapter1/xian-cheng.md)
     * [线程安全](chapter1/123.md)
     * [线程池](chapter1/1234.md)
-    * [Callable](chapter1/callable.md)
+    * [创建线程](chapter1/callable.md)
     * [Timer](chapter1/timer.md)
     * [线程状态](chapter1/xian-cheng-zhuang-tai.md)
     * [同步/异步/阻塞](chapter1/tong-6b65-yi-6b65-zu-sai.md)
