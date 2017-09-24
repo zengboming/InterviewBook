@@ -82,7 +82,5 @@ ngnix会有很多链接进来， epoll会把他们都监视起来，然后像拨
 1. epoll 现在是线程安全的。
 2. epoll 现在不仅告诉你sock组里面数据，还会告诉你具体哪个sock有数据，你不用自己去找了。
 
-![](/assets/IO.png)
-
-
+![](/assets/importIO.png)
 
