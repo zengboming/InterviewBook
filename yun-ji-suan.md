@@ -56,5 +56,5 @@
 
 ![](/assets/importVM.png)
 
-
+组件之间用rest API通信，组件内用RPC通信
 
