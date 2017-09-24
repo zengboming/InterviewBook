@@ -9,7 +9,7 @@ Socket 起源于 Unix ，Unix/Linux 基本哲学之一就是“一切皆文件�
 流程：
 
 1. socket\(\) 创建套接字
-2. bind\(\) 分配套接字地址
+2. bind\(\) 分配套接字地址 端口
 3. listen\(\) 等待连接请求
 4. accept\(\) 允许连接请求
 5. read\(\)/write\(\) 数据交换
