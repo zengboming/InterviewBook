@@ -37,7 +37,7 @@
   * [Struts](javakuang-jia/struts.md)
   * [Spring](javakuang-jia/spring.md)
   * [Hibernate](javakuang-jia/hibernate.md)
-  * Servlet
+  * [Servlet](javakuang-jia/servlet.md)
   * [高性能网站架构](javakuang-jia/gao-xing-neng-wang-zhan-jia-gou.md)
   * [RPC](javakuang-jia/rpc.md)
 * [计算机网络](javate-dian.md)
