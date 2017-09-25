@@ -22,9 +22,25 @@ long转int丢精度
 
 逻辑页=逻辑地址/页面大小
 
+一个数组中，两两相等，只有一个数是单独的，求这个数：异或 （A Xor A = 0，A Xor 0 = A）
+
+一个数组中（1001个），都不相同，只有一个是相同的，求出这个数：
+
+假设 重复数为A，其余 999个数异或结果为 B
+
+0 - 1000 异或结果为 ：A Xor B
+
+0 - 1001 异或结果为 ：A Xor （A Xor B）
+
+0 - 1000的结果 和 0 - 1001的结果在异或： （A Xor B） Xor （A Xor （A Xor B））  = A Xor B Xor B  = A
+
+60亿个数（0 - 60亿）,有一个数变成了另一个数，找到不存在的那个数：
+
+求0-60亿的和，和现在所有数的和，知道差值，问题转变为：求60亿中重复的数，使用异或求得，然后再减差值
+
 ES优化：[http://blog.csdn.net/opensure/article/details/47617437](http://blog.csdn.net/opensure/article/details/47617437)
 
-http://www.jianshu.com/p/4c57a246164c
+[http://www.jianshu.com/p/4c57a246164c](http://www.jianshu.com/p/4c57a246164c)
 
 1. scroll 深度分页开销大，设置最大页
 2. 分片和副本
