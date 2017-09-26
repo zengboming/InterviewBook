@@ -80,7 +80,7 @@
   * [事务](shi-wu.md)
   * [锁](suo.md)
   * [范式](fan-shi.md)
-  * 存储引擎
+  * [存储引擎](cun-chu-yin-qing.md)
 * [MongoDB](mongodb.md)
 * [Linux](linux.md)
 * [面试内容](mian-shi-nei-rong.md)
