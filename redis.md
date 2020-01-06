@@ -1,6 +1,10 @@
 数据结构：
 
-包括string\(字符串\)、list\(链表\)、set\(集合\)、zset\(sorted set --有序集合\)和hash（哈希类型）。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。
+1. string\(字符串\)
+2. list\(链表\)
+3. set\(集合\)
+4. sorted set \(有序集合\)
+5. hash（哈希类型）
 
 ### Redis与Memcached的区别与比较
 
