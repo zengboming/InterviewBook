@@ -9,11 +9,7 @@
 
 当请求一个新的连接时，如果连接池有有可用的持久连接，连接管理器就会使用其中的一个，而不是再创建一个新的连接。
 
-会在使用某个连接前，监测这个连接是否已经过时，如果服务器端关闭了连接，那么连接就会失效。
-
-
-
-
+httpclient会在使用某个连接前，监测这个连接是否已经过时，如果服务器端关闭了连接，那么连接就会失效。
 
 PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager\(\);
 
