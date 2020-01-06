@@ -22,7 +22,7 @@ HotSpot虚拟机将其物理上划分为新生代（young generation）、老年
    Eden和Survivor内存大小默认8：1，即新生代为10M时，默认Eden 8M，S0 1M, S1 1M。
 
 2. 执行顺序：  
-   1. 大多数情况，对象在Eden中分配，当Eden没有足够空间时会触发一个Minor GC。  
+   1. 大多数情况，对象在Eden中分配，当Eden没有足够空间时会触发一个Minor GC（young gc）。  
    2. 当新生代发生GC时，会将存活的对象移动到其中一个survivor内存区域，并清空Eden区域。  
    3.如果仍然放不下，再次触发minorGC，将存活的对象放到另一个Survivor上，然后清空Eden和那个Survivor区的内存。  
    4. 存活对象会反复在S0，S1之间移动，移动中年龄会自动累加，当GC年龄超过默认阈值15时，就将该对象移动到老年代。
