@@ -7,6 +7,7 @@
 3. set\(集合\)
 4. sorted set \(有序集合\)
 5. hash（哈希类型）
+   1. Hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。 比如我们可以Hash数据结构来存储用户信息，商品信息等等。
 
 ### Redis与Memcached的区别与比较
 
