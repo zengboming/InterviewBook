@@ -27,3 +27,9 @@ cm.setMaxPerRoute\(new HttpRoute\(localhost\), 50\);
 
 CloseableHttpClient httpClient = HttpClients.custom\(\) .setConnectionManager\(cm\) .build\(\);
 
+
+
+
+
+[https://www.cnblogs.com/xrq730/p/10963689.html](https://www.cnblogs.com/xrq730/p/10963689.html)
+
