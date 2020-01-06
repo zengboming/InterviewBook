@@ -89,5 +89,5 @@
 * [面试内容](mian-shi-nei-rong.md)
 * [Dubbo](dubbo.md)
 * Kafka
-* Redis
+* [Redis](redis.md)
 
