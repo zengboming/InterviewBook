@@ -23,3 +23,7 @@
 
 Redis为单进程单线程模式，采用队列模式将并发访问变为串行访问。Redis本身没有锁的概念，Redis对于多个客户端连接并不存在竞争
 
+
+
+[https://juejin.im/post/5c3c1df2e51d45207f54b189](https://juejin.im/post/5c3c1df2e51d45207f54b189)
+
