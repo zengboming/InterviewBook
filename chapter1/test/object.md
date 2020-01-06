@@ -25,13 +25,12 @@ Java中的Object类是所有类的父类，它提供了以下11个方法：
 8. public final native void wait\(long timeout\) throws InterruptedException
 
 9. public final void wait\(long timeout, int nanos\) throws InterruptedException
+
 10. public final void wait\(\) throws InterruptedException
 11. protected void finalize\(\) throws Throwable { }  
     1. 该方法的作用是实例被垃圾回收器回收的时候触发的操作
 
-
-
 二、**native**
 
-native是与C++联合开发的时候用的！使用native关键字说明这个方法是原生函数，也就是这个方法是用C/C++语言实现的，并且被编译成了DLL，由java去调用。
+native是与C++联合开发的时候用的！使用native关键字说明这个方法是原生函数，也就是这个方法是用C/C++语言实现的，并且被编译成了DLL，由java去调用。native方法是通过java中的JNI实现的。
 
