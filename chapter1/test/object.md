@@ -15,12 +15,14 @@ Java中的Object类是所有类的父类，它提供了以下11个方法：
    1. 由于Object本身没有实现Cloneable接口，所以不重写clone方法并且进行调用的话会发生CloneNotSupportedException异常。
 
 5. public String toString\(\)
+
 6. public final native void notify\(\)
 7. public final native void notifyAll\(\)
 8. public final native void wait\(long timeout\) throws InterruptedException
 9. public final void wait\(long timeout, int nanos\) throws InterruptedException
 10. public final void wait\(\) throws InterruptedException
 11. protected void finalize\(\) throws Throwable { }
+    1. 该方法的作用是实例被垃圾回收器回收的时候触发的操作
 
 
 
