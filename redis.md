@@ -7,6 +7,7 @@
 3. set\(集合\)
    1. set对外提供的功能与list类似是一个列表的功能，特殊之处在于set是可以自动排重的。
 4. sorted set \(有序集合\)
+   1. 和set相比，sorted set增加了一个权重参数score，使得集合中的元素能够按score进行有序排列。
 5. hash（哈希类型）
    1. Hash是一个string类型的field和value的映射表，hash特别适合用于存储对象。 比如我们可以Hash数据结构来存储用户信息，商品信息等等。
 
